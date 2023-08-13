@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // ** React Imports
 import BlankLayout from "@/@core/layouts/BlankLayout";
 import Error404 from "@/app/404";

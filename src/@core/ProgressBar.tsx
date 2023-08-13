@@ -16,10 +16,7 @@ const ProgressBar = () => {
   return (
     <>
       <div className={styles.loadingContainer}>
-        <div
-          className={styles.loadingBar}
-          style={{ width: `${progress}%` }}
-        />
+        <div className={styles.loadingBar} style={{ width: `${progress}%` }} />
       </div>
     </>
   );
