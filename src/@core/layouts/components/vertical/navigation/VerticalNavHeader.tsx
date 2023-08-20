@@ -41,7 +41,7 @@ const HeaderTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
   transition: "opacity .25s ease-in-out, margin .25s ease-in-out",
 }));
 
-const StyledLink = styled("a")({
+const StyledLink = styled("div")({
   display: "flex",
   alignItems: "center",
   textDecoration: "none",
@@ -59,7 +59,7 @@ const VerticalNavHeader = (props: Props) => {
       {userVerticalNavMenuBranding ? (
         userVerticalNavMenuBranding(props)
       ) : (
-        <Link href="/" passHref>
+        <Link href="/" passHref className="text-decoration-none">
           <StyledLink>
             <svg
               width={30}

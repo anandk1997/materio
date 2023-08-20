@@ -90,8 +90,6 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
     }
   };
 
-  console.log("item", item);
-
   return (
     <ListItem
       disablePadding
@@ -101,8 +99,9 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
     >
       <Link
         passHref
-        href={item.path === undefined ? "/" : `${item.path}`}
-        className="w-100 no-underline"
+        href={item.path ?? "/"}
+        className="w-100 text-decoration-none"
+        {...(item.openInNewTab ? { target: "_blank" } : null)}
       >
         <MenuNavLink
           component={"a"}

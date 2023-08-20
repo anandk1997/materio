@@ -79,7 +79,7 @@ const CardStatsVertical = (props: CardStatsVerticalProps) => {
 
 export default CardStatsVertical;
 
-CardStatsVertical.defaultProps = {
-  color: "primary",
-  trend: "positive",
-};
+// CardStatsVertical.defaultProps = {
+//   color: "primary",
+//   trend: "positive",
+// };
