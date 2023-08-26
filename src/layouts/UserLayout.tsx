@@ -1,34 +1,34 @@
-"use client";
+'use client'
 // ** React Imports
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 // ** MUI Imports
-import Box from "@mui/material/Box";
-import { Theme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from '@mui/material/Box'
+import { Theme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 // ** Layout Imports
 // !Do not remove this Layout import
-import VerticalLayout from "@/@core/layouts/VerticalLayout";
+import VerticalLayout from '@/@core/layouts/VerticalLayout'
 
 // ** Navigation Imports
-import VerticalNavItems from "@/navigation/vertical";
+import VerticalNavItems from '@/navigation/vertical'
 
 // ** Component Import
-import UpgradeToProButton from "./components/UpgradeToProButton";
-import VerticalAppBarContent from "./components/vertical/AppBarContent";
+import UpgradeToProButton from './components/UpgradeToProButton'
+import VerticalAppBarContent from './components/vertical/AppBarContent'
 
 // ** Hook Import
-import { useSettings } from "@/@core/hooks/useSettings";
-import Image from "next/image";
+import { useSettings } from '@/@core/hooks/useSettings'
+import Image from 'next/image'
 
 interface Props {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const UserLayout = ({ children }: Props) => {
   // ** Hooks
-  const { settings, saveSettings } = useSettings();
+  const { settings, saveSettings } = useSettings()
 
   /**
    *  The below variable will hide the current layout menu at given screen size.
@@ -38,26 +38,26 @@ const UserLayout = ({ children }: Props) => {
    *  to know more about what values can be passed to this hook.
    *  ! Do not change this value unless you know what you are doing. It can break the template.
    */
-  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
 
   const UpgradeToProImg = () => {
     return (
-      <Box sx={{ mx: "auto" }}>
+      <Box sx={{ mx: 'auto' }}>
         <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://themeselection.com/products/materio-mui-react-nextjs-admin-template/"
+          target='_blank'
+          rel='noreferrer'
+          href='https://themeselection.com/products/materio-mui-react-nextjs-admin-template/'
         >
           <Image
             width={230}
             height={230}
-            alt="upgrade to premium"
+            alt='upgrade to premium'
             src={`/images/misc/upgrade-banner-${settings.mode}.png`}
           />
         </a>
       </Box>
-    );
-  };
+    )
+  }
 
   return (
     <VerticalLayout
@@ -67,7 +67,7 @@ const UserLayout = ({ children }: Props) => {
       verticalNavItems={VerticalNavItems()} // Navigation Items
       afterVerticalNavMenuContent={UpgradeToProImg}
       verticalAppBarContent={(
-        props, // AppBar Content
+        props // AppBar Content
       ) => (
         <VerticalAppBarContent
           hidden={hidden}
@@ -80,7 +80,7 @@ const UserLayout = ({ children }: Props) => {
       {children}
       <UpgradeToProButton />
     </VerticalLayout>
-  );
-};
+  )
+}
 
-export default UserLayout;
+export default UserLayout

@@ -1,23 +1,23 @@
-"use client";
-import { TailSpin } from "react-loader-spinner";
+'use client'
+import { TailSpin } from 'react-loader-spinner'
 
 const loading = () => {
   return (
     <>
-      <div className="flex justify-center align-items-center h-[100vh]">
+      <div className='flex justify-center align-items-center h-[100vh]'>
         <TailSpin
-          height="80"
-          width="80"
-          color="#4fa94d"
-          ariaLabel="tail-spin-loading"
-          radius="1"
+          height='80'
+          width='80'
+          color='#4fa94d'
+          ariaLabel='tail-spin-loading'
+          radius='1'
           wrapperStyle={{}}
-          wrapperClass=""
+          wrapperClass=''
           visible={true}
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default loading;
+export default loading

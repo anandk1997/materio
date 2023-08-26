@@ -1,12 +1,12 @@
 // ** MUI Imports
-import { Theme } from "@mui/material/styles";
+import { Theme } from '@mui/material/styles'
 
 const Chip = (theme: Theme) => {
   return {
     MuiChip: {
       styleOverrides: {
         outlined: {
-          "&.MuiChip-colorDefault": {
+          '&.MuiChip-colorDefault': {
             borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`,
           },
         },
@@ -16,7 +16,7 @@ const Chip = (theme: Theme) => {
         },
       },
     },
-  };
-};
+  }
+}
 
-export default Chip;
+export default Chip

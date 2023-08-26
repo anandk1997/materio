@@ -1,5 +1,5 @@
 // ** MUI Imports
-import { Theme } from "@mui/material/styles";
+import { Theme } from '@mui/material/styles'
 
 const Avatar = (theme: Theme) => {
   return {
@@ -8,7 +8,7 @@ const Avatar = (theme: Theme) => {
         colorDefault: {
           color: theme.palette.text.secondary,
           backgroundColor:
-            theme.palette.mode === "light"
+            theme.palette.mode === 'light'
               ? theme.palette.grey[200]
               : theme.palette.grey[700],
         },
@@ -20,14 +20,14 @@ const Avatar = (theme: Theme) => {
     MuiAvatarGroup: {
       styleOverrides: {
         root: {
-          justifyContent: "flex-end",
-          ".MuiCard-root & .MuiAvatar-root": {
+          justifyContent: 'flex-end',
+          '.MuiCard-root & .MuiAvatar-root': {
             borderColor: theme.palette.background.paper,
           },
         },
       },
     },
-  };
-};
+  }
+}
 
-export default Avatar;
+export default Avatar

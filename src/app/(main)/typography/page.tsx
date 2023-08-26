@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
 // ** MUI Imports
-import Grid from "@mui/material/Grid";
+import Grid from '@mui/material/Grid'
 
 // ** Demo Components Imports
-import TypographyTexts from "@/views/typography/TypographyTexts";
-import TypographyHeadings from "@/views/typography/TypographyHeadings";
+import TypographyTexts from '@/views/typography/TypographyTexts'
+import TypographyHeadings from '@/views/typography/TypographyHeadings'
 
 const TypographyPage = () => {
   return (
@@ -17,7 +17,7 @@ const TypographyPage = () => {
         <TypographyTexts />
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default TypographyPage;
+export default TypographyPage
