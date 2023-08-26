@@ -31,19 +31,19 @@ const navigation = (): VerticalNavItemsType => {
     {
       title: "Login",
       icon: Login,
-      path: "/pages/login",
+      path: "/login",
       openInNewTab: true,
     },
     {
       title: "Register",
       icon: AccountPlusOutline,
-      path: "/pages/register",
+      path: "/register",
       openInNewTab: true,
     },
     {
       title: "Error",
       icon: AlertCircleOutline,
-      path: "/pages/error",
+      path: "/error",
       openInNewTab: true,
     },
     {

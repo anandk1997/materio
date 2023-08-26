@@ -62,7 +62,6 @@ import AccountDetailsOutline from "mdi-material-ui/AccountDetailsOutline";
 import AccountArrowLeftOutline from "mdi-material-ui/AccountArrowLeftOutline";
 import AccountArrowRightOutline from "mdi-material-ui/AccountArrowRightOutline";
 import AccountBoxMultipleOutline from "mdi-material-ui/AccountBoxMultipleOutline";
-import UserLayout from "@/layouts/UserLayout";
 
 const icons = {
   Abacus,
@@ -135,36 +134,34 @@ const Icons = () => {
   };
 
   return (
-    <UserLayout>
-      <Grid container spacing={6}>
-        <Grid item xs={12}>
-          <Typography variant="h5">
-            <Link href="https://materialdesignicons.com/" target="_blank">
-              Material Design Icons
-            </Link>
-          </Typography>
-          <Typography variant="body2">
-            Material Design Icons from the Community
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={6}>
-            {renderIconGrids()}
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Button
-            target="_blank"
-            rel="noreferrer"
-            component={Link}
-            variant="contained"
-            href="https://materialdesignicons.com/"
-          >
-            View All Material Design Icons
-          </Button>
+    <Grid container spacing={6}>
+      <Grid item xs={12}>
+        <Typography variant="h5">
+          <Link href="https://materialdesignicons.com/" target="_blank">
+            Material Design Icons
+          </Link>
+        </Typography>
+        <Typography variant="body2">
+          Material Design Icons from the Community
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Grid container spacing={6}>
+          {renderIconGrids()}
         </Grid>
       </Grid>
-    </UserLayout>
+      <Grid item xs={12} sx={{ textAlign: "center" }}>
+        <Button
+          target="_blank"
+          rel="noreferrer"
+          component={Link}
+          variant="contained"
+          href="https://materialdesignicons.com/"
+        >
+          View All Material Design Icons
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 

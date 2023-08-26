@@ -9,8 +9,8 @@
     "lint": "next lint",
     "export": "next export",
     "eslint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "format": "prettier --write src",
-    "pcheck": "npx prettier --check src"
+    "format": "prettier --write .",
+    "pcheck": "npx prettier --check ."
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",

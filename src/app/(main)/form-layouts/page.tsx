@@ -14,28 +14,25 @@ import FormLayoutsAlignment from "@/views/form-layouts/FormLayoutsAlignment";
 
 // ** Third Party Styles Imports
 import "react-datepicker/dist/react-datepicker.css";
-import UserLayout from "@/layouts/UserLayout";
 
 const FormLayouts = () => {
   return (
-    <UserLayout>
-      <DatePickerWrapper>
-        <Grid container spacing={6}>
-          <Grid item xs={12} md={6}>
-            <FormLayoutsBasic />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormLayoutsIcons />
-          </Grid>
-          <Grid item xs={12}>
-            <FormLayoutsSeparator />
-          </Grid>
-          <Grid item xs={12}>
-            <FormLayoutsAlignment />
-          </Grid>
+    <DatePickerWrapper>
+      <Grid container spacing={6}>
+        <Grid item xs={12} md={6}>
+          <FormLayoutsBasic />
         </Grid>
-      </DatePickerWrapper>
-    </UserLayout>
+        <Grid item xs={12} md={6}>
+          <FormLayoutsIcons />
+        </Grid>
+        <Grid item xs={12}>
+          <FormLayoutsSeparator />
+        </Grid>
+        <Grid item xs={12}>
+          <FormLayoutsAlignment />
+        </Grid>
+      </Grid>
+    </DatePickerWrapper>
   );
 };
 
