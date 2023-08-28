@@ -41,6 +41,9 @@ import BlankLayout from '@/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from '@/views/pages/auth/FooterIllustration'
+import { toast } from 'react-hot-toast'
+import { signUp } from '@/api/auth'
+import { useMutation } from '@tanstack/react-query'
 
 interface State {
   password: string
@@ -75,6 +78,34 @@ const RegisterPage = () => {
     password: '',
     showPassword: false,
   })
+
+  // const [values, setValues] = useState({
+  //   email: '',
+  //   password: '',
+  // })
+  // const [error, setError] = useState(null)
+  // const [gettingMe, setGettingMe] = useState(false)
+  // const { setMe } = useAuth()
+
+  // const loginRequest = useMutation(data => signUp(data.email, data.password), {
+  //   onError: e => {
+  //     setError(e.response?.data?.message ?? 'Sorry, there was an error.')
+  //   },
+  //   onSuccess: () => {
+  //     setMe().then(() => setGettingMe(false))
+  //   },
+  // })
+
+  // // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  // //   setError(null)
+  // //   setValues({ ...values, [e.target.name]: e.target.value })
+  // // }
+
+  // const handleSubmit = e => {
+  //   e.preventDefault()
+  //   setError(null)
+  //   loginRequest.mutate(values)
+  // }
 
   // ** Hook
   const theme = useTheme()
@@ -236,6 +267,7 @@ const RegisterPage = () => {
               size='large'
               type='submit'
               variant='contained'
+              onClick={() => toast.success('Successfully created!')}
               sx={{ marginBottom: 7 }}
             >
               Sign up

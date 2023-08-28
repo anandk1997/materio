@@ -16,7 +16,6 @@ import StatisticsCard from '@/views/dashboard/StatisticsCard'
 import WeeklyOverview from '@/views/dashboard/WeeklyOverview'
 import DepositWithdraw from '@/views/dashboard/DepositWithdraw'
 import SalesByCountries from '@/views/dashboard/SalesByCountries'
-import UserLayout from '@/layouts/UserLayout'
 import {
   PollIcon,
   CurrencyUsdIcon,

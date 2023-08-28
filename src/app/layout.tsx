@@ -11,6 +11,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 // ** Global css styles
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AppContextProviders from '@/@core/context/AppContextProviders'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <Toaster position='top-center' reverseOrder={false} />
         <AppContextProviders>{children}</AppContextProviders>
       </body>
     </html>
