@@ -21,7 +21,7 @@ import {
   CurrencyUsdIcon,
   HelpCircleOutlineIcon,
   BriefcaseVariantOutlineIcon,
-} from '@/@core/Icons/MuiIcons'
+} from '@/@core/Icons'
 
 const Dashboard = () => {
   return (

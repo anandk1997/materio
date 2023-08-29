@@ -41,35 +41,16 @@ import BlankLayout from '@/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from '@/views/pages/auth/FooterIllustration'
-
-interface State {
-  password: string
-  showPassword: boolean
-}
-
-// ** Styled Components
-const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
-  [theme.breakpoints.up('sm')]: { width: '28rem' },
-}))
-
-const LinkStyled = styled('a')(({ theme }) => ({
-  fontSize: '0.875rem',
-  textDecoration: 'none',
-  color: theme.palette.primary.main,
-}))
-
-const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(
-  ({ theme }) => ({
-    '& .MuiFormControlLabel-label': {
-      fontSize: '0.875rem',
-      color: theme.palette.text.secondary,
-    },
-  })
-)
+import { Signin } from '@/types/auth'
+import { toast } from 'react-hot-toast'
+import { useMutation } from '@tanstack/react-query'
+import { signIn } from '@/api/auth'
+import Buttons from '@/@core/components/Button/index.tsx'
 
 const LoginPage = () => {
-  // ** State
-  const [values, setValues] = useState<State>({
+  // ** Signin
+  const [values, setValues] = useState<Signin>({
+    userId: '',
     password: '',
     showPassword: false,
   })
@@ -78,16 +59,27 @@ const LoginPage = () => {
   const theme = useTheme()
   const router = useRouter()
 
-  const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (prop: keyof Signin) => (event: ChangeEvent<HTMLInputElement>) =>
     setValues({ ...values, [prop]: event.target.value })
-  }
 
-  const handleClickShowPassword = () => {
+  const handleClickShowPassword = () =>
     setValues({ ...values, showPassword: !values.showPassword })
-  }
 
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
+  }
+
+  const { isLoading, mutate } = useMutation((data: Signin) => signIn(data), {
+    onError: e => toast.error('Some Error!'),
+    onSuccess: () => {
+      toast.success('Success')
+      router.push('/')
+    },
+  })
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    mutate(values)
   }
 
   return (
@@ -182,14 +174,18 @@ const LoginPage = () => {
               Please sign-in to your account and start the adventure
             </Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
+
+          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
             <TextField
               autoFocus
               fullWidth
-              id='email'
-              label='Email'
+              id='userId'
+              label='User ID'
+              value={values.userId}
+              onChange={handleChange('userId')}
               sx={{ marginBottom: 4 }}
             />
+
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
@@ -222,21 +218,24 @@ const LoginPage = () => {
               }}
             >
               <FormControlLabel control={<Checkbox />} label='Remember Me' />
-              <Link passHref href='/'>
+              <Link passHref href='/' className='text-decoration-none'>
                 <LinkStyled onClick={e => e.preventDefault()}>
                   Forgot Password?
                 </LinkStyled>
               </Link>
             </Box>
-            <Button
+
+            <Buttons
               fullWidth
               size='large'
+              type='submit'
               variant='contained'
+              loading={isLoading}
               sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
             >
               Login
-            </Button>
+            </Buttons>
+
             <Box
               sx={{
                 display: 'flex',
@@ -249,7 +248,7 @@ const LoginPage = () => {
                 New on our platform?
               </Typography>
               <Typography variant='body2'>
-                <Link passHref href='/register'>
+                <Link passHref href='/register' className='text-decoration-none'>
                   <LinkStyled>Create an account</LinkStyled>
                 </Link>
               </Typography>
@@ -313,3 +312,23 @@ const LoginPage = () => {
 LoginPage.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
 
 export default LoginPage
+
+// ** Styled Components
+const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
+  [theme.breakpoints.up('sm')]: { width: '28rem' },
+}))
+
+const LinkStyled = styled('a')(({ theme }) => ({
+  fontSize: '0.875rem',
+  textDecoration: 'none',
+  color: theme.palette.primary.main,
+}))
+
+const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(
+  ({ theme }) => ({
+    '& .MuiFormControlLabel-label': {
+      fontSize: '0.875rem',
+      color: theme.palette.text.secondary,
+    },
+  })
+)
