@@ -10,7 +10,7 @@ export const CurrencyUsdIcon = () => <CurrencyUsd />
 export const HelpCircleOutlineIcon = () => <HelpCircleOutline />
 export const BriefcaseVariantOutlineIcon = () => <BriefcaseVariantOutline />
 
-export const MaterioIcons = ({ theme }: { theme: any }) => (
+export const MaterioIcon = ({ theme }: { theme: any }) => (
   <svg
     width={35}
     height={29}

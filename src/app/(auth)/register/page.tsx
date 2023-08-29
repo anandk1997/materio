@@ -43,7 +43,7 @@ import { useMutation } from '@tanstack/react-query'
 import { Signup } from '@/types/auth'
 import Buttons from '@/@core/components/Button/index.tsx'
 import { useRouter } from 'next/navigation'
-import { MaterioIcons } from '@/@core/Icons'
+import { MaterioIcon } from '@/@core/Icons'
 
 const RegisterPage = () => {
   const theme = useTheme()
@@ -83,7 +83,7 @@ const RegisterPage = () => {
               justifyContent: 'center',
             }}
           >
-            <MaterioIcons {...{ theme }} />
+            <MaterioIcon {...{ theme }} />
 
             <Typography
               variant='h6'
