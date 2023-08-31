@@ -40,7 +40,7 @@ import FooterIllustrationsV1 from '@/views/pages/auth/FooterIllustration'
 import { toast } from 'react-hot-toast'
 import { signUp } from '@/api/auth'
 import { useMutation } from '@tanstack/react-query'
-import { Signup } from '@/types/auth'
+import { Signup, SignupResponse } from '@/types/auth'
 import Buttons from '@/@core/components/Button/index.tsx'
 import { useRouter } from 'next/navigation'
 import { MaterioIcon } from '@/@core/Icons'
@@ -56,15 +56,16 @@ const RegisterPage = () => {
   })
 
   const { isLoading, mutate } = useMutation((data: Signup) => signUp(data), {
-    onError: e => toast.error('Some Error!'),
-    onSuccess: () => {
-      toast.success('Registered Successfully')
+    onError: (e: SignupResponse) => toast.error(e.data.statusMessage ?? 'Some Error!'),
+    onSuccess: (e: SignupResponse) => {
+      toast.success(e.data.statusMessage ?? 'Registered Successfully')
+      localStorage.setItem('usertoken', e.data.data.token ?? '')
       router.push('/')
     },
   })
 
-  const handleChange = (prop: keyof Signup) => (event: ChangeEvent<HTMLInputElement>) =>
-    setValues({ ...values, [prop]: event.target.value })
+  const handleChange = (prop: keyof Signup) => (e: ChangeEvent<HTMLInputElement>) =>
+    setValues({ ...values, [prop]: e.target.value })
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
