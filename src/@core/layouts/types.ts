@@ -1,5 +1,6 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { Settings } from '@/@core/context/settingsContext'
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 export type ContentWidth = 'full' | 'boxed'
 
@@ -20,7 +21,7 @@ export type NavLink = {
   badgeContent?: string
   externalLink?: boolean
   openInNewTab?: boolean
-  icon?: string | string[] | ReactNode
+  icon?: string | string[] | ReactNode | React.SVGProps<SVGSVGElement> | React.ElementType
   badgeColor?:
     | 'default'
     | 'primary'
@@ -37,7 +38,45 @@ export type NavSectionTitle = {
   subject?: string
 }
 
-export type VerticalNavItemsType = (NavLink | NavSectionTitle)[]
+export type ColapsibleTitle = {
+  colapsibleTitle: string
+  navVisible?: boolean
+  toggleNavVisibility?: () => void
+  item?: any
+  icon:
+    | string
+    | string[]
+    | React.ReactNode
+    | React.SVGProps<SVGSVGElement>
+    | React.ElementType
+    | IconDefinition
+  colapsibleMenu: Array<{
+    subMenu: string
+    path: string
+    action?: string
+    subject?: string
+    disabled?: boolean
+    badgeContent?: string
+    externalLink?: boolean
+    openInNewTab?: boolean
+    icon:
+      | string
+      | string[]
+      | React.ReactNode
+      | React.SVGProps<SVGSVGElement>
+      | React.ElementType
+    badgeColor?:
+      | 'default'
+      | 'primary'
+      | 'secondary'
+      | 'success'
+      | 'error'
+      | 'warning'
+      | 'info'
+  }>
+}
+
+export type VerticalNavItemsType = (NavLink | NavSectionTitle | ColapsibleTitle)[]
 
 export type LayoutProps = {
   hidden: boolean

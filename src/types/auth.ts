@@ -7,16 +7,25 @@ export interface Signup {
 export interface Signin {
   userId: string
   password: string
-  showPassword?: boolean
 }
 
-export interface SignupResponse {
+export interface ErrorResponse {
+  response: {
+    data: {
+      statusCode: number
+      statusMessage: string
+      type: string
+    }
+  }
+}
+
+export interface SuccessResponse {
   data: {
     statusCode: number
-    statusMessage?: string
+    statusMessage: string
     type: string
     data: {
-      token?: string
+      token: string
     }
   }
 }

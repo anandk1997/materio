@@ -40,7 +40,7 @@ import FooterIllustrationsV1 from '@/views/pages/auth/FooterIllustration'
 import { toast } from 'react-hot-toast'
 import { signUp } from '@/api/auth'
 import { useMutation } from '@tanstack/react-query'
-import { Signup, SignupResponse } from '@/types/auth'
+import { Signup, ErrorResponse, SuccessResponse } from '@/types/auth'
 import Buttons from '@/@core/components/Button/index.tsx'
 import { useRouter } from 'next/navigation'
 import { MaterioIcon } from '@/@core/Icons'
@@ -48,7 +48,6 @@ import { MaterioIcon } from '@/@core/Icons'
 const RegisterPage = () => {
   const theme = useTheme()
   const router = useRouter()
-
   const [values, setValues] = useState<Signup>({
     email: '',
     sponsorId: '',
@@ -56,8 +55,9 @@ const RegisterPage = () => {
   })
 
   const { isLoading, mutate } = useMutation((data: Signup) => signUp(data), {
-    onError: (e: SignupResponse) => toast.error(e.data.statusMessage ?? 'Some Error!'),
-    onSuccess: (e: SignupResponse) => {
+    onError: (e: ErrorResponse) =>
+      toast.error(e.response.data.statusMessage ?? 'Some Error!'),
+    onSuccess: (e: SuccessResponse) => {
       toast.success(e.data.statusMessage ?? 'Registered Successfully')
       localStorage.setItem('usertoken', e.data.data.token ?? '')
       router.push('/')
@@ -156,11 +156,13 @@ const RegisterPage = () => {
 
             <Buttons
               fullWidth
+              // style={{}}
               size='large'
               type='submit'
               variant='contained'
               loading={isLoading}
-              sx={{ marginBottom: 7 }}
+              disabled={isLoading}
+              sx={{ marginBottom: 7, background: theme.palette.primary.main }}
             >
               Sign up
             </Buttons>
