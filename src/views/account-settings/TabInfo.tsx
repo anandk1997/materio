@@ -1,7 +1,4 @@
-// ** React Imports
 import { forwardRef, useState } from 'react'
-
-// ** MUI Imports
 import Grid from '@mui/material/Grid'
 import Radio from '@mui/material/Radio'
 import Select from '@mui/material/Select'
@@ -15,11 +12,7 @@ import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormControlLabel from '@mui/material/FormControlLabel'
-
-// ** Third Party Imports
 import DatePicker from 'react-datepicker'
-
-// ** Styled Components
 import DatePickerWrapper from '@/@core/styles/libs/react-datepicker'
 
 const CustomInput = forwardRef((props, ref) => {
@@ -27,7 +20,6 @@ const CustomInput = forwardRef((props, ref) => {
 })
 
 const TabInfo = () => {
-  // ** State
   const [date, setDate] = useState<Date | null | undefined>(null)
 
   return (
