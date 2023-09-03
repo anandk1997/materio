@@ -11,6 +11,7 @@ import {
   AccountPlusOutline,
   AlertCircleOutline,
   GoogleCirclesExtended,
+  BookmarkRemove,
 } from 'mdi-material-ui'
 import {
   ManageAccounts,
@@ -18,6 +19,23 @@ import {
   AccountBalanceWallet,
   LockReset,
   History,
+  VerifiedUser,
+  Fingerprint,
+  FormatColorFill,
+  AccountTree,
+  GroupWork,
+  Assessment,
+  East,
+  ForkRight,
+  EmojiEvents,
+  Payment,
+  AddCard,
+  AttachMoney,
+  AddLink,
+  CancelPresentation,
+  ConfirmationNumber,
+  ForwardToInbox,
+  Unarchive,
 } from '@mui/icons-material'
 import {
   faDollarSign,
@@ -42,6 +60,7 @@ const navigation = (): VerticalNavItemsType => {
     {
       sectionTitle: 'Pages',
     },
+
     {
       colapsibleTitle: 'Profile',
       icon: faUser,
@@ -73,28 +92,29 @@ const navigation = (): VerticalNavItemsType => {
         },
       ],
     },
+
     {
       colapsibleTitle: 'USDT Account',
       icon: faDollarSign,
       colapsibleMenu: [
         {
           subMenu: 'Activate Now',
-          icon: Login,
+          icon: VerifiedUser,
           path: '/usdt/activate-now',
         },
         {
           subMenu: 'Activation History',
-          icon: Login,
+          icon: History,
           path: '/usdt/activation-history',
         },
         {
           subMenu: 'Re-Activation History',
-          icon: Login,
+          icon: Fingerprint,
           path: '/usdt/re-activation-history',
         },
         {
           subMenu: 'Topup Wallet Statement',
-          icon: Login,
+          icon: FormatColorFill,
           path: '/usdt/topup-wallet-statement',
         },
       ],
@@ -106,17 +126,17 @@ const navigation = (): VerticalNavItemsType => {
       colapsibleMenu: [
         {
           subMenu: 'My Partner Tree',
-          icon: Login,
+          icon: AccountTree,
           path: '/team-details/my-partner-tree',
         },
         {
           subMenu: 'My Partner',
-          icon: Login,
+          icon: GroupWork,
           path: '/team-details/my-partner',
         },
         {
           subMenu: 'Level Report',
-          icon: Login,
+          icon: Assessment,
           path: '/team-details/level-report',
         },
       ],
@@ -128,27 +148,27 @@ const navigation = (): VerticalNavItemsType => {
       colapsibleMenu: [
         {
           subMenu: 'Direct Income',
-          icon: Login,
+          icon: East,
           path: '/statement/direct-income',
         },
         {
           subMenu: 'DTB Income',
-          icon: Login,
+          icon: ForkRight,
           path: '/statement/dtb-income',
         },
         {
           subMenu: 'Team Level Income',
-          icon: Login,
+          icon: GroupWork,
           path: '/statement/team-level-income',
         },
         {
           subMenu: 'Rewards Income',
-          icon: Login,
+          icon: EmojiEvents,
           path: '/statement/rewards-income',
         },
         {
           subMenu: 'Payout Summary',
-          icon: Login,
+          icon: Payment,
           path: '/statement/payout-summary',
         },
       ],
@@ -160,32 +180,32 @@ const navigation = (): VerticalNavItemsType => {
       colapsibleMenu: [
         {
           subMenu: 'Deposit VMC BEP20',
-          icon: Login,
+          icon: AddCard,
           path: '/fund-manager/deposit-vmc',
         },
         {
           subMenu: 'Fund Request History',
-          icon: Login,
+          icon: AttachMoney,
           path: '/fund-manager/fund-request-history',
         },
         {
           subMenu: 'Deposit Manually',
-          icon: Login,
+          icon: AddLink,
           path: '/fund-manager/deposit-manually',
         },
         {
           subMenu: 'Withdraw',
-          icon: Login,
+          icon: BookmarkRemove,
           path: '/fund-manager/withdraw',
         },
         {
           subMenu: 'VMC Clossing',
-          icon: Login,
+          icon: CancelPresentation,
           path: '/fund-manager/vmc-closing',
         },
         {
           subMenu: 'Fund History',
-          icon: Login,
+          icon: AttachMoney,
           path: '/fund-manager/fund-history',
         },
       ],
@@ -197,17 +217,17 @@ const navigation = (): VerticalNavItemsType => {
       colapsibleMenu: [
         {
           subMenu: 'Create Ticket',
-          icon: Login,
+          icon: ConfirmationNumber,
           path: '/support-ticket/create-ticket',
         },
         {
           subMenu: 'Inbox',
-          icon: Login,
+          icon: ForwardToInbox,
           path: '/support-ticket/inbox',
         },
         {
           subMenu: 'Outbox',
-          icon: Login,
+          icon: Unarchive,
           path: '/support-ticket/outbox',
         },
       ],

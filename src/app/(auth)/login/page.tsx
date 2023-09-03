@@ -28,7 +28,7 @@ import { ErrorResponse, Signin, SuccessResponse } from '@/types/auth'
 import { toast } from 'react-hot-toast'
 import { useMutation } from '@tanstack/react-query'
 import { signIn } from '@/api/auth'
-import Buttons from '@/@core/components/Button/index.tsx'
+import Buttons from '@/@core/components/Buttons'
 import { MaterioIcon } from '@/@core/Icons'
 
 const LoginPage = () => {

@@ -1,12 +1,6 @@
 'use client'
-
-// ** React Imports
 import { useState, Fragment, ChangeEvent, MouseEvent, ReactNode } from 'react'
-
-// ** Next Imports
 import Link from 'next/link'
-
-// ** MUI Components
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
@@ -22,26 +16,18 @@ import MuiCard, { CardProps } from '@mui/material/Card'
 import MuiFormControlLabel, {
   FormControlLabelProps,
 } from '@mui/material/FormControlLabel'
-
-// ** Icons Imports
 import Google from 'mdi-material-ui/Google'
 import Github from 'mdi-material-ui/Github'
 import Twitter from 'mdi-material-ui/Twitter'
 import Facebook from 'mdi-material-ui/Facebook'
-
-// ** Configs
 import themeConfig from '@/configs/themeConfig'
-
-// ** Layout Import
 import BlankLayout from '@/@core/layouts/BlankLayout'
-
-// ** Demo Imports
 import FooterIllustrationsV1 from '@/views/pages/auth/FooterIllustration'
 import { toast } from 'react-hot-toast'
 import { signUp } from '@/api/auth'
 import { useMutation } from '@tanstack/react-query'
 import { Signup, ErrorResponse, SuccessResponse } from '@/types/auth'
-import Buttons from '@/@core/components/Button/index.tsx'
+import Buttons from '@/@core/components/Buttons'
 import { useRouter } from 'next/navigation'
 import { MaterioIcon } from '@/@core/Icons'
 
@@ -156,7 +142,6 @@ const RegisterPage = () => {
 
             <Buttons
               fullWidth
-              // style={{}}
               size='large'
               type='submit'
               variant='contained'
@@ -249,7 +234,6 @@ RegisterPage.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
 
 export default RegisterPage
 
-// ** Styled Components
 const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '28rem' },
 }))

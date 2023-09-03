@@ -1,7 +1,4 @@
-// ** MUI Imports
 import { Theme } from '@mui/material/styles'
-
-// ** Theme Config Imports
 import themeConfig from '@/configs/themeConfig'
 
 const Button = (theme: Theme) => {
@@ -18,6 +15,7 @@ const Button = (theme: Theme) => {
         contained: {
           boxShadow: theme.shadows[3],
           padding: `${theme.spacing(1.875, 5.5)}`,
+          backgroundColor: `${theme.palette.primary.main} !important`,
         },
         outlined: {
           padding: `${theme.spacing(1.625, 5.25)}`,
