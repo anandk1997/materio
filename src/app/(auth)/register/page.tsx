@@ -1,5 +1,5 @@
 'use client'
-import { useState, Fragment, ChangeEvent, MouseEvent, ReactNode } from 'react'
+import { useState, Fragment, ChangeEvent, MouseEvent, ReactNode, useEffect } from 'react'
 import Link from 'next/link'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
@@ -30,8 +30,11 @@ import { Signup, ErrorResponse, SuccessResponse } from '@/types/auth'
 import Buttons from '@/@core/components/Buttons'
 import { useRouter } from 'next/navigation'
 import { MaterioIcon } from '@/@core/Icons'
+import { useLoadingContext, useSetLoading } from '@/@core/context/LoadingContext'
 
 const RegisterPage = () => {
+  useSetLoading()
+  const { setLoading } = useLoadingContext()
   const theme = useTheme()
   const router = useRouter()
   const [values, setValues] = useState<Signup>({
@@ -40,7 +43,7 @@ const RegisterPage = () => {
     name: '',
   })
 
-  const { isLoading, mutate } = useMutation((data: Signup) => signUp(data), {
+  const { isLoading, mutate } = useMutation(signUp, {
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
@@ -57,6 +60,10 @@ const RegisterPage = () => {
     e.preventDefault()
     mutate(values)
   }
+
+  useEffect(() => {
+    setLoading(isLoading)
+  }, [isLoading])
 
   return (
     <Box className='flex justify-center content-center align-items-center h-[100vh]'>
@@ -164,7 +171,12 @@ const RegisterPage = () => {
                 Already have an account?
               </Typography>
               <Typography variant='body2'>
-                <Link passHref href='/login' className='text-decoration-none'>
+                <Link
+                  passHref
+                  href='/login'
+                  className='text-decoration-none'
+                  onClick={() => setLoading(true)}
+                >
                   <LinkStyled className='text-decoration-none'>
                     Sign in instead
                   </LinkStyled>

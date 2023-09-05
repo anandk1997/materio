@@ -2,7 +2,7 @@ import React from 'react'
 import { ListItem } from '@mui/material'
 import { ElementType, ReactNode } from 'react'
 import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import Chip from '@mui/material/Chip'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
@@ -13,16 +13,21 @@ import themeConfig from '@/configs/themeConfig'
 import { NavLink } from '@/@core/layouts/types'
 import { Settings } from '@/@core/context/settingsContext'
 import UserIcon from '@/layouts/components/UserIcon'
-import { handleURLQueries } from '@/@core/layouts/utils'
+import { useLoadingContext } from '@/@core/context/LoadingContext'
 
 const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
-  const router = useRouter()
   const pathname = usePathname()
   const IconTag: ReactNode = item.icon as ReactNode
+  const verifyPath = pathname === item.path
+  const { setLoading } = useLoadingContext()
 
-  const isNavLinkActive = () => {
-    if (pathname === item.path || handleURLQueries(router, item.path)) return true
-    else return false
+  const onLinkClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!item.path) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+    if (navVisible) toggleNavVisibility()
+    if (!verifyPath) setLoading(true)
   }
 
   return (
@@ -40,17 +45,9 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
       >
         <MenuNavLink
           component={'span'}
-          className={`${isNavLinkActive() && 'active'} no-underline`}
+          className={`${verifyPath && 'active'} no-underline`}
           {...(item.openInNewTab ? { target: '_blank' } : null)}
-          onClick={e => {
-            if (item.path === undefined) {
-              e.preventDefault()
-              e.stopPropagation()
-            }
-            if (navVisible) {
-              toggleNavVisibility()
-            }
-          }}
+          onClick={onLinkClick}
           sx={{
             pl: 5.5,
             ...(item.disabled ? { pointerEvents: 'none' } : { cursor: 'pointer' }),

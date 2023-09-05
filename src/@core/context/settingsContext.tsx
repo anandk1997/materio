@@ -1,14 +1,7 @@
 'use client'
-// ** React Imports
 import { createContext, useState, ReactNode } from 'react'
-
-// ** MUI Imports
 import { PaletteMode } from '@mui/material'
-
-// ** ThemeConfig Import
 import themeConfig from '@/configs/themeConfig'
-
-// ** Types Import
 import { ThemeColor, ContentWidth } from '@/@core/layouts/types'
 
 export type Settings = {
@@ -28,19 +21,14 @@ const initialSettings: Settings = {
   contentWidth: themeConfig.contentWidth,
 }
 
-// ** Create Context
 export const SettingsContext = createContext<SettingsContextValue>({
   saveSettings: () => null,
   settings: initialSettings,
 })
 
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
-  // ** State
   const [settings, setSettings] = useState<Settings>({ ...initialSettings })
-
-  const saveSettings = (updatedSettings: Settings) => {
-    setSettings(updatedSettings)
-  }
+  const saveSettings = (updatedSettings: Settings) => setSettings(updatedSettings)
 
   return (
     <SettingsContext.Provider value={{ settings, saveSettings }}>

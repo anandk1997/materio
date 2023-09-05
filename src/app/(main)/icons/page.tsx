@@ -62,6 +62,7 @@ import AccountDetailsOutline from 'mdi-material-ui/AccountDetailsOutline'
 import AccountArrowLeftOutline from 'mdi-material-ui/AccountArrowLeftOutline'
 import AccountArrowRightOutline from 'mdi-material-ui/AccountArrowRightOutline'
 import AccountBoxMultipleOutline from 'mdi-material-ui/AccountBoxMultipleOutline'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 const icons = {
   Abacus,
@@ -115,6 +116,8 @@ const icons = {
 }
 
 const Icons = () => {
+  useSetLoading()
+
   const renderIconGrids = () => {
     return Object.keys(icons).map(key => {
       const IconTag = icons[key as keyof typeof icons]

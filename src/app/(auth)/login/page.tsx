@@ -1,5 +1,5 @@
 'use client'
-import { ChangeEvent, MouseEvent, ReactNode, useState } from 'react'
+import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Box from '@mui/material/Box'
@@ -30,8 +30,11 @@ import { useMutation } from '@tanstack/react-query'
 import { signIn } from '@/api/auth'
 import Buttons from '@/@core/components/Buttons'
 import { MaterioIcon } from '@/@core/Icons'
+import { useLoadingContext, useSetLoading } from '@/@core/context/LoadingContext'
 
 const LoginPage = () => {
+  useSetLoading()
+  const { setLoading } = useLoadingContext()
   const theme = useTheme()
   const router = useRouter()
   const [values, setValues] = useState<Signin>({
@@ -56,6 +59,10 @@ const LoginPage = () => {
     e.preventDefault()
     mutate(values)
   }
+
+  useEffect(() => {
+    setLoading(isLoading)
+  }, [isLoading])
 
   return (
     <Box className='flex justify-center content-center align-items-center h-[100vh]'>
@@ -125,10 +132,13 @@ const LoginPage = () => {
               }}
             >
               <FormControlLabel control={<Checkbox />} label='Remember Me' />
-              <Link passHref href='/' className='text-decoration-none'>
-                <LinkStyled onClick={e => e.preventDefault()}>
-                  Forgot Password?
-                </LinkStyled>
+              <Link
+                passHref
+                href='/'
+                className='text-decoration-none'
+                onClick={() => setLoading(true)}
+              >
+                <LinkStyled>Forgot Password?</LinkStyled>
               </Link>
             </Box>
 
@@ -155,7 +165,12 @@ const LoginPage = () => {
                 New on our platform?
               </Typography>
               <Typography variant='body2'>
-                <Link passHref href='/register' className='text-decoration-none'>
+                <Link
+                  passHref
+                  href='/register'
+                  className='text-decoration-none'
+                  onClick={() => setLoading(true)}
+                >
                   <LinkStyled>Create an account</LinkStyled>
                 </Link>
               </Typography>

@@ -5,25 +5,19 @@ import MuiListSubheader, { ListSubheaderProps } from '@mui/material/ListSubheade
 import { ColapsibleTitle, NavSectionTitle } from '@/@core/layouts/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
-import { PropsWithChildren, ReactNode, useContext, useEffect, useState } from 'react'
-import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import VerticalNavLink from './VerticalNavLink'
+import { PropsWithChildren, useContext, useEffect, useState } from 'react'
+import VerticalNavLink from '../VerticalNavLink'
 import { ItemFunctionResult, ItemMenu } from '@/types/colapsibleMenu'
-import { Fragment } from 'react'
 import {
   Accordion,
   AccordionContext,
   Button,
-  Nav,
   useAccordionButton,
 } from 'react-bootstrap'
 import {
   IconDefinition,
   faChevronUp,
-  faPuzzlePiece,
   faChevronDown,
-  // faChevronUp,
 } from '@fortawesome/free-solid-svg-icons'
 import styles from './VerticleNavSectionTitle.module.scss'
 
@@ -85,19 +79,16 @@ export const ColapsibleMenu = ({
   })
 
   return (
-    <>
-      <ul className='list-unstyled'>
-        {/* <SidebarNavGroup toggleIcon={faPuzzlePiece} toggleText={item.colapsibleTitle}> */}
-        <SidebarNavGroup toggleIcon={item.icon} toggleText={item.colapsibleTitle}>
-          {item?.colapsibleMenu?.map((s: any) => (
-            <div key={s.path} className={styles.itemMenu}>
-              {/* @ts-ignore */}
-              <VerticalNavLink {...itemMenu(s)} />
-            </div>
-          ))}
-        </SidebarNavGroup>
-      </ul>
-    </>
+    <ul className='list-unstyled'>
+      <SidebarNavGroup toggleIcon={item.icon} toggleText={item.colapsibleTitle}>
+        {item?.colapsibleMenu?.map((s: any) => (
+          <div key={s.path} className={styles.itemMenu}>
+            {/* @ts-ignore */}
+            <VerticalNavLink {...itemMenu(s)} />
+          </div>
+        ))}
+      </SidebarNavGroup>
+    </ul>
   )
 }
 

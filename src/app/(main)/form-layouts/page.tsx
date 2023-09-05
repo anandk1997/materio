@@ -14,8 +14,11 @@ import FormLayoutsAlignment from '@/views/form-layouts/FormLayoutsAlignment'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 const FormLayouts = () => {
+  useSetLoading()
+
   return (
     <DatePickerWrapper>
       <Grid container spacing={6}>

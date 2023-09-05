@@ -7,7 +7,7 @@ const Buttons: React.FC<ButtonsProps> = ({ loading, disabled, children, ...props
   <Button disabled={disabled || loading} {...props}>
     {loading && (
       <Spinner
-        style={{ position: 'absolute' }}
+        style={{ position: 'absolute', color: 'white' }}
         animation='border'
         role='status'
         size='sm'

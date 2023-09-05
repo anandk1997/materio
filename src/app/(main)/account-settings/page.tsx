@@ -14,8 +14,10 @@ import TabInfo from '@/views/account-settings/TabInfo'
 import TabAccount from '@/views/account-settings/TabAccount'
 import TabSecurity from '@/views/account-settings/TabSecurity'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 const AccountSettings = () => {
+  useSetLoading()
   const [value, setValue] = useState<string>('account')
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {

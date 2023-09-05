@@ -14,8 +14,11 @@ import TableSpanning from '@/views/tables/TableSpanning'
 import TableCustomized from '@/views/tables/TableCustomized'
 import TableCollapsible from '@/views/tables/TableCollapsible'
 import TableStickyHeader from '@/views/tables/TableStickyHeader'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 const MUITable = () => {
+  useSetLoading()
+
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
