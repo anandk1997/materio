@@ -8,12 +8,7 @@ import classNames from 'classnames'
 import { PropsWithChildren, useContext, useEffect, useState } from 'react'
 import VerticalNavLink from '../VerticalNavLink'
 import { ItemFunctionResult, ItemMenu } from '@/types/colapsibleMenu'
-import {
-  Accordion,
-  AccordionContext,
-  Button,
-  useAccordionButton,
-} from 'react-bootstrap'
+import { Accordion, AccordionContext, Button, useAccordionButton } from 'react-bootstrap'
 import {
   IconDefinition,
   faChevronUp,

@@ -15,6 +15,7 @@ import EyeOutline from 'mdi-material-ui/EyeOutline'
 import KeyOutline from 'mdi-material-ui/KeyOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 import LockOpenOutline from 'mdi-material-ui/LockOpenOutline'
+import Image from 'next/image'
 
 const TabSecurity = () => {
   const [values, setValues] = useState<State>({
@@ -172,7 +173,7 @@ const TabSecurity = () => {
               justifyContent: 'center',
             }}
           >
-            <img width={183} alt='avatar' height={256} src='/images/pages/pose-m-1.png' />
+            <Image width={183} alt='avatar' height={256} src='/images/pages/pose-m-1.png' />
           </Grid>
         </Grid>
       </CardContent>

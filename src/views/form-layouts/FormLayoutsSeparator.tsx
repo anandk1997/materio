@@ -246,4 +246,6 @@ const FormLayoutsSeparator = () => {
   )
 }
 
+CustomInput.displayName = 'CustomInput'
+
 export default FormLayoutsSeparator

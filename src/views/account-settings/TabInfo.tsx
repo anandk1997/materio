@@ -132,4 +132,6 @@ const TabInfo = () => {
   )
 }
 
+CustomInput.displayName = 'CustomInput'
+
 export default TabInfo

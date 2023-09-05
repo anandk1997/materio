@@ -62,7 +62,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     setLoading(isLoading)
-  }, [isLoading])
+  }, [isLoading, setLoading])
 
   return (
     <Box className='flex justify-center content-center align-items-center h-[100vh]'>

@@ -21,6 +21,7 @@ import { toast } from 'react-hot-toast'
 import { editProfile } from '@/api/accountSettings'
 import { AccountSettings, SuccessResponse } from '@/types/accountSettings'
 import Buttons from '@/@core/components/Buttons'
+import Image from 'next/image'
 
 const init = {
   name: '',
@@ -78,7 +79,7 @@ const TabAccount = () => {
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <ImgStyled src={imgSrc} alt='Profile Pic' />
+              <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
               <Box>
                 <ButtonStyled
                   component='label'
@@ -228,7 +229,7 @@ const TabAccount = () => {
 
 export default TabAccount
 
-const ImgStyled = styled('img')(({ theme }) => ({
+const ImgStyled = styled(Image)(({ theme }) => ({
   width: 120,
   height: 120,
   marginRight: theme.spacing(6.25),
