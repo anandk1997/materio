@@ -1,91 +1,33 @@
-import React, { useState } from 'react'
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import React from 'react'
+import { ListItem } from '@mui/material'
 import { ElementType, ReactNode } from 'react'
-
-// ** Next Imports
 import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
-
-// ** MUI Imports
+import { usePathname } from 'next/navigation'
 import Chip from '@mui/material/Chip'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import Box, { BoxProps } from '@mui/material/Box'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemButton, { ListItemButtonProps } from '@mui/material/ListItemButton'
-
-// ** Configs Import
 import themeConfig from '@/configs/themeConfig'
-
-// ** Types
 import { NavLink } from '@/@core/layouts/types'
 import { Settings } from '@/@core/context/settingsContext'
-
-// ** Custom Components Imports
 import UserIcon from '@/layouts/components/UserIcon'
-
-// ** Utils
-import { handleURLQueries } from '@/@core/layouts/utils'
-
-interface Props {
-  item: NavLink
-  settings: Settings
-  navVisible?: boolean
-  toggleNavVisibility: () => void
-}
-
-// ** Styled Components
-const MenuNavLink = styled(ListItemButton)<
-  ListItemButtonProps & {
-    component?: ElementType
-    target?: '_blank' | undefined
-  }
->(({ theme }) => ({
-  width: '100%',
-  borderTopRightRadius: 100,
-  borderBottomRightRadius: 100,
-  color: theme.palette.text.primary,
-  padding: theme.spacing(2.25, 3.5),
-  transition: 'opacity .25s ease-in-out',
-  '&.active, &.active:hover': {
-    boxShadow: theme.shadows[3],
-    backgroundImage: `linear-gradient(98deg, ${theme.palette.customColors.primaryGradient}, ${theme.palette.primary.main} 94%)`,
-  },
-  '&.active .MuiTypography-root, &.active .MuiSvgIcon-root': {
-    color: `${theme.palette.common.white} !important`,
-  },
-}))
-
-const MenuItemTextMetaWrapper = styled(Box)<BoxProps>({
-  width: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  transition: 'opacity .25s ease-in-out',
-  ...(themeConfig.menuTextTruncate && { overflow: 'hidden' }),
-})
+import { useLoadingContext } from '@/@core/context/LoadingContext'
 
 const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
-  // ** Hooks
-  const router = useRouter()
   const pathname = usePathname()
+  const IconTag: ReactNode = item.icon as ReactNode
+  const verifyPath = pathname === item.path
+  const { setLoading } = useLoadingContext()
 
-  const IconTag: ReactNode = item.icon
-
-  const isNavLinkActive = () => {
-    if (pathname === item.path || handleURLQueries(router, item.path)) {
-      return true
-    } else {
-      return false
+  const onLinkClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!item.path) {
+      e.preventDefault()
+      e.stopPropagation()
     }
+    if (navVisible) toggleNavVisibility()
+    if (!verifyPath) setLoading(true)
   }
 
   return (
@@ -102,18 +44,10 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
         {...(item.openInNewTab ? { target: '_blank' } : null)}
       >
         <MenuNavLink
-          component={'a'}
-          className={`${isNavLinkActive() && 'active'} no-underline`}
+          component={'span'}
+          className={`${verifyPath && 'active'} no-underline`}
           {...(item.openInNewTab ? { target: '_blank' } : null)}
-          onClick={e => {
-            if (item.path === undefined) {
-              e.preventDefault()
-              e.stopPropagation()
-            }
-            if (navVisible) {
-              toggleNavVisibility()
-            }
-          }}
+          onClick={onLinkClick}
           sx={{
             pl: 5.5,
             ...(item.disabled ? { pointerEvents: 'none' } : { cursor: 'pointer' }),
@@ -155,33 +89,39 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
 
 export default VerticalNavLink
 
-export function CollapsibleSubMenu({
-  title,
-  subItems,
-}: {
-  title: string
-  subItems: string[]
-}) {
-  const [expanded, setExpanded] = useState(false)
-
-  const toggleExpansion = () => {
-    setExpanded(prevState => !prevState)
-  }
-
-  return (
-    <Accordion expanded={expanded}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} onClick={toggleExpansion}>
-        <ListItemText primary={title} />
-      </AccordionSummary>
-      <AccordionDetails>
-        <List>
-          {subItems.map((subItem, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={subItem} />
-            </ListItem>
-          ))}
-        </List>
-      </AccordionDetails>
-    </Accordion>
-  )
+interface Props {
+  item: NavLink
+  settings: Settings
+  navVisible?: boolean
+  toggleNavVisibility: () => void
 }
+
+export const MenuNavLink = styled(ListItemButton)<
+  ListItemButtonProps & {
+    component?: ElementType
+    target?: '_blank' | undefined
+  }
+>(({ theme }) => ({
+  width: '100%',
+  borderTopRightRadius: 100,
+  borderBottomRightRadius: 100,
+  color: theme.palette.text.primary,
+  padding: theme.spacing(2.25, 3.5),
+  transition: 'opacity .25s ease-in-out',
+  '&.active, &.active:hover': {
+    boxShadow: theme.shadows[3],
+    backgroundImage: `linear-gradient(98deg, ${theme.palette.customColors.primaryGradient}, ${theme.palette.primary.main} 94%)`,
+  },
+  '&.active .MuiTypography-root, &.active .MuiSvgIcon-root': {
+    color: `${theme.palette.common.white} !important`,
+  },
+}))
+
+export const MenuItemTextMetaWrapper = styled(Box)<BoxProps>({
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  transition: 'opacity .25s ease-in-out',
+  ...(themeConfig.menuTextTruncate && { overflow: 'hidden' }),
+})

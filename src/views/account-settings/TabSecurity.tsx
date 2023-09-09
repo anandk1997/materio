@@ -1,7 +1,4 @@
-// ** React Imports
 import { ChangeEvent, MouseEvent, useState } from 'react'
-
-// ** MUI Imports
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Avatar from '@mui/material/Avatar'
@@ -14,24 +11,13 @@ import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
-
-// ** Icons Imports
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import KeyOutline from 'mdi-material-ui/KeyOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 import LockOpenOutline from 'mdi-material-ui/LockOpenOutline'
-
-interface State {
-  newPassword: string
-  currentPassword: string
-  showNewPassword: boolean
-  confirmNewPassword: string
-  showCurrentPassword: boolean
-  showConfirmNewPassword: boolean
-}
+import Image from 'next/image'
 
 const TabSecurity = () => {
-  // ** States
   const [values, setValues] = useState<State>({
     newPassword: '',
     currentPassword: '',
@@ -41,7 +27,6 @@ const TabSecurity = () => {
     showConfirmNewPassword: false,
   })
 
-  // Handle Current Password
   const handleCurrentPasswordChange =
     (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value })
@@ -188,7 +173,12 @@ const TabSecurity = () => {
               justifyContent: 'center',
             }}
           >
-            <img width={183} alt='avatar' height={256} src='/images/pages/pose-m-1.png' />
+            <Image
+              width={183}
+              alt='avatar'
+              height={256}
+              src='/images/pages/pose-m-1.png'
+            />
           </Grid>
         </Grid>
       </CardContent>
@@ -257,3 +247,12 @@ const TabSecurity = () => {
   )
 }
 export default TabSecurity
+
+interface State {
+  newPassword: string
+  currentPassword: string
+  showNewPassword: boolean
+  confirmNewPassword: string
+  showCurrentPassword: boolean
+  showConfirmNewPassword: boolean
+}

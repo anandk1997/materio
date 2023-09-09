@@ -1,10 +1,7 @@
 'use client'
 
-// ** MUI Imports
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-
-// ** Demo Components Imports
 import CardUser from '@/views/cards/CardUser'
 import CardImgTop from '@/views/cards/CardImgTop'
 import CardMobile from '@/views/cards/CardMobile'
@@ -20,8 +17,11 @@ import CardWithCollapse from '@/views/cards/CardWithCollapse'
 import CardVerticalRatings from '@/views/cards/CardVerticalRatings'
 import CardNavigationCenter from '@/views/cards/CardNavigationCenter'
 import CardHorizontalRatings from '@/views/cards/CardHorizontalRatings'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 const CardBasic = () => {
+  useSetLoading()
+
   return (
     <Grid container spacing={6}>
       <Grid item xs={12} sx={{ paddingBottom: 4 }}>

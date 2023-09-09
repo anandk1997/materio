@@ -3,13 +3,10 @@
 import React, { ReactNode } from 'react'
 import ThemeComponent from '@/@core/theme/ThemeComponent'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-// ** Emotion Imports
 import { CacheProvider } from '@emotion/react'
 import { createEmotionCache } from '@/@core/utils/create-emotion-cache'
-
-// ** ContextProviders
 import { SettingsConsumer, SettingsProvider } from '@/@core/context/settingsContext'
+import { LoadingProvider } from './LoadingContext'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,13 +24,15 @@ const ContextProviders = ({ children }: { children: ReactNode }) => {
     <>
       <QueryClientProvider client={queryClient}>
         <CacheProvider value={emotionCache}>
-          <SettingsProvider>
-            <SettingsConsumer>
-              {({ settings }) => {
-                return <ThemeComponent settings={settings}>{children}</ThemeComponent>
-              }}
-            </SettingsConsumer>
-          </SettingsProvider>
+          <LoadingProvider>
+            <SettingsProvider>
+              <SettingsConsumer>
+                {({ settings }) => {
+                  return <ThemeComponent settings={settings}>{children}</ThemeComponent>
+                }}
+              </SettingsConsumer>
+            </SettingsProvider>
+          </LoadingProvider>
         </CacheProvider>
       </QueryClientProvider>
     </>

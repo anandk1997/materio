@@ -1,7 +1,4 @@
-// ** React Imports
 import { ChangeEvent, MouseEvent, useState, SyntheticEvent } from 'react'
-
-// ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
@@ -17,18 +14,10 @@ import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormHelperText from '@mui/material/FormHelperText'
-
-// ** Icons Imports
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
-interface State {
-  password: string
-  showPassword: boolean
-}
-
 const FormLayoutsBasic = () => {
-  // ** States
   const [values, setValues] = useState<State>({
     password: '',
     showPassword: false,
@@ -173,3 +162,8 @@ const FormLayoutsBasic = () => {
 }
 
 export default FormLayoutsBasic
+
+interface State {
+  password: string
+  showPassword: boolean
+}

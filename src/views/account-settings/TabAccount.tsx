@@ -1,12 +1,9 @@
-// ** React Imports
 import { useState, ElementType, ChangeEvent, SyntheticEvent } from 'react'
-
-// ** MUI Imports
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
 import Alert from '@mui/material/Alert'
-import Select from '@mui/material/Select'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
@@ -17,40 +14,54 @@ import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
 import Button, { ButtonProps } from '@mui/material/Button'
-
-// ** Icons Imports
 import Close from 'mdi-material-ui/Close'
+import { ErrorResponse } from '@/types/auth'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'react-hot-toast'
+import { editProfile } from '@/api/accountSettings'
+import { AccountSettings, SuccessResponse } from '@/types/accountSettings'
+import Buttons from '@/@core/components/Buttons'
+import Image from 'next/image'
 
-const ImgStyled = styled('img')(({ theme }) => ({
-  width: 120,
-  height: 120,
-  marginRight: theme.spacing(6.25),
-  borderRadius: theme.shape.borderRadius,
-}))
-
-const ButtonStyled = styled(Button)<
-  ButtonProps & { component?: ElementType; htmlFor?: string }
->(({ theme }) => ({
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    textAlign: 'center',
-  },
-}))
-
-const ResetButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
-  marginLeft: theme.spacing(4.5),
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    marginLeft: 0,
-    textAlign: 'center',
-    marginTop: theme.spacing(4),
-  },
-}))
+const init = {
+  name: '',
+  email: '',
+  contact: '',
+  country: '',
+  status: '',
+}
 
 const TabAccount = () => {
-  // ** State
   const [openAlert, setOpenAlert] = useState<boolean>(true)
   const [imgSrc, setImgSrc] = useState<string>('/images/avatars/1.png')
+  const [values, setValues] = useState<AccountSettings>(init)
+
+  const { isLoading, mutate } = useMutation(
+    (data: AccountSettings) => editProfile(data),
+    {
+      onError: (e: ErrorResponse) =>
+        toast.error(e.response.data.statusMessage ?? 'Some Error!'),
+      onSuccess: (e: SuccessResponse) => {
+        toast.success(e.data.statusMessage ?? 'Success')
+      },
+    }
+  )
+  const handleChange =
+    (prop: keyof AccountSettings) =>
+    (
+      e: SelectChangeEvent<string> | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) =>
+      setValues({ ...values, [prop]: e.target.value })
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    mutate(values)
+  }
+
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    mutate(values)
+  }
 
   const onChange = (file: ChangeEvent) => {
     const reader = new FileReader()
@@ -64,11 +75,11 @@ const TabAccount = () => {
 
   return (
     <CardContent>
-      <form>
+      <form noValidate autoComplete='off' onSubmit={handleSubmit}>
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <ImgStyled src={imgSrc} alt='Profile Pic' />
+              <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
               <Box>
                 <ButtonStyled
                   component='label'
@@ -84,6 +95,7 @@ const TabAccount = () => {
                     id='account-settings-upload-image'
                   />
                 </ButtonStyled>
+
                 <ResetButtonStyled
                   color='error'
                   variant='outlined'
@@ -91,6 +103,7 @@ const TabAccount = () => {
                 >
                   Reset
                 </ResetButtonStyled>
+
                 <Typography variant='body2' sx={{ marginTop: 5 }}>
                   Allowed PNG or JPEG. Max size of 800K.
                 </Typography>
@@ -101,32 +114,43 @@ const TabAccount = () => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label='Username'
-              placeholder='johnDoe'
-              defaultValue='johnDoe'
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
               label='Name'
-              placeholder='John Doe'
-              defaultValue='John Doe'
+              placeholder='Name'
+              value={values.name}
+              onChange={handleChange('name')}
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
               type='email'
               label='Email'
               placeholder='johnDoe@example.com'
-              defaultValue='johnDoe@example.com'
+              value={values.email}
+              onChange={handleChange('email')}
             />
           </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              type='number'
+              label='Contact Number'
+              placeholder='Contact'
+              value={values.contact}
+              onChange={handleChange('contact')}
+            />
+          </Grid>
+
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
-              <InputLabel>Role</InputLabel>
-              <Select label='Role' defaultValue='admin'>
+              <InputLabel>Country</InputLabel>
+              <Select
+                label='Country'
+                value={values.country}
+                onChange={handleChange('country')}
+              >
                 <MenuItem value='admin'>Admin</MenuItem>
                 <MenuItem value='author'>Author</MenuItem>
                 <MenuItem value='editor'>Editor</MenuItem>
@@ -135,23 +159,20 @@ const TabAccount = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6}>
+
+          <Grid item xs={12} sm={12}>
             <FormControl fullWidth>
               <InputLabel>Status</InputLabel>
-              <Select label='Status' defaultValue='active'>
+              <Select
+                label='Status'
+                value={values.status}
+                onChange={handleChange('status')}
+              >
                 <MenuItem value='active'>Active</MenuItem>
                 <MenuItem value='inactive'>Inactive</MenuItem>
                 <MenuItem value='pending'>Pending</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label='Company'
-              placeholder='ABC Pvt. Ltd.'
-              defaultValue='ABC Pvt. Ltd.'
-            />
           </Grid>
 
           {openAlert ? (
@@ -181,10 +202,22 @@ const TabAccount = () => {
           ) : null}
 
           <Grid item xs={12}>
-            <Button variant='contained' sx={{ marginRight: 3.5 }}>
+            <Buttons
+              type='submit'
+              variant='contained'
+              loading={isLoading}
+              disabled={isLoading}
+              sx={{ marginRight: 3.5 }}
+            >
               Save Changes
-            </Button>
-            <Button type='reset' variant='outlined' color='secondary'>
+            </Buttons>
+
+            <Button
+              type='reset'
+              variant='outlined'
+              color='secondary'
+              onClick={() => setValues(init)}
+            >
               Reset
             </Button>
           </Grid>
@@ -195,3 +228,29 @@ const TabAccount = () => {
 }
 
 export default TabAccount
+
+const ImgStyled = styled(Image)(({ theme }) => ({
+  width: 120,
+  height: 120,
+  marginRight: theme.spacing(6.25),
+  borderRadius: theme.shape.borderRadius,
+}))
+
+const ButtonStyled = styled(Button)<
+  ButtonProps & { component?: ElementType; htmlFor?: string }
+>(({ theme }) => ({
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    textAlign: 'center',
+  },
+}))
+
+const ResetButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
+  marginLeft: theme.spacing(4.5),
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    marginLeft: 0,
+    textAlign: 'center',
+    marginTop: theme.spacing(4),
+  },
+}))

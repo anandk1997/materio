@@ -1,7 +1,4 @@
-// ** React Imports
 import { ChangeEvent, forwardRef, MouseEvent, useState } from 'react'
-
-// ** MUI Imports
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -18,35 +15,11 @@ import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-
-// ** Third Party Imports
 import DatePicker from 'react-datepicker'
-
-// ** Icons Imports
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
-interface State {
-  password: string
-  password2: string
-  showPassword: boolean
-  showPassword2: boolean
-}
-
-const CustomInput = forwardRef((props, ref) => {
-  return (
-    <TextField
-      fullWidth
-      {...props}
-      inputRef={ref}
-      label='Birth Date'
-      autoComplete='off'
-    />
-  )
-})
-
 const FormLayoutsSeparator = () => {
-  // ** States
   const [language, setLanguage] = useState<string[]>([])
   const [date, setDate] = useState<Date | null | undefined>(null)
   const [values, setValues] = useState<State>({
@@ -247,3 +220,24 @@ const FormLayoutsSeparator = () => {
 }
 
 export default FormLayoutsSeparator
+
+interface State {
+  password: string
+  password2: string
+  showPassword: boolean
+  showPassword2: boolean
+}
+
+const CustomInput = forwardRef((props, ref) => {
+  return (
+    <TextField
+      fullWidth
+      {...props}
+      inputRef={ref}
+      label='Birth Date'
+      autoComplete='off'
+    />
+  )
+})
+
+CustomInput.displayName = 'CustomInput'

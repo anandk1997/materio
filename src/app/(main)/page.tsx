@@ -1,14 +1,7 @@
-// "use client";
-// // ** MUI Imports
+'use client'
 import Grid from '@mui/material/Grid'
-
-// // ** Custom Components Imports
 import CardStatisticsVerticalComponent from '@/@core/components/card-statistics/card-stats-vertical'
-
-// // ** Styled Component Import
 import ApexChartWrapper from '@/@core/styles/libs/react-apexcharts'
-
-// // ** Demo Components Imports
 import Table from '@/views/dashboard/Table'
 import Trophy from '@/views/dashboard/Trophy'
 import TotalEarning from '@/views/dashboard/TotalEarning'
@@ -21,9 +14,12 @@ import {
   CurrencyUsdIcon,
   HelpCircleOutlineIcon,
   BriefcaseVariantOutlineIcon,
-} from '@/@core/Icons/MuiIcons'
+} from '@/@core/Icons'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 const Dashboard = () => {
+  useSetLoading()
+
   return (
     <>
       <ApexChartWrapper>

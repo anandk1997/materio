@@ -21,6 +21,7 @@ import Facebook from 'mdi-material-ui/Facebook'
 import Linkedin from 'mdi-material-ui/Linkedin'
 import GooglePlus from 'mdi-material-ui/GooglePlus'
 import ShareVariant from 'mdi-material-ui/ShareVariant'
+import Image from 'next/image'
 
 // Styled Grid component
 const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
@@ -59,7 +60,7 @@ const CardMobile = () => {
               justifyContent: 'center',
             }}
           >
-            <img
+            <Image
               width={137}
               height={176}
               alt='Apple iPhone 11 Pro'

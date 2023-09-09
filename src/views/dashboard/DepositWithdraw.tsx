@@ -8,6 +8,7 @@ import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import MuiDivider, { DividerProps } from '@mui/material/Divider'
+import Image from 'next/image'
 
 interface DataType {
   logo: string
@@ -159,7 +160,7 @@ const DepositWithdraw = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <img
+                  <Image
                     src={item.logo}
                     alt={item.title}
                     width={item.logoWidth}
@@ -238,7 +239,7 @@ const DepositWithdraw = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <img
+                  <Image
                     src={item.logo}
                     alt={item.title}
                     width={item.logoWidth}

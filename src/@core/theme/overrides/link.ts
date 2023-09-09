@@ -1,4 +1,4 @@
-export default {
+const muiLinks = {
   MuiLink: {
     styleOverrides: {
       root: {
@@ -7,3 +7,5 @@ export default {
     },
   },
 }
+
+export default muiLinks

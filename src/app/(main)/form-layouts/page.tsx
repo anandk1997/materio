@@ -1,21 +1,16 @@
 'use client'
-
-// ** MUI Imports
 import Grid from '@mui/material/Grid'
-
-// ** Styled Component
 import DatePickerWrapper from '@/@core/styles/libs/react-datepicker'
-
-// ** Demo Components Imports
 import FormLayoutsBasic from '@/views/form-layouts/FormLayoutsBasic'
 import FormLayoutsIcons from '@/views/form-layouts/FormLayoutsIcons'
 import FormLayoutsSeparator from '@/views/form-layouts/FormLayoutsSeparator'
 import FormLayoutsAlignment from '@/views/form-layouts/FormLayoutsAlignment'
-
-// ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 const FormLayouts = () => {
+  useSetLoading()
+
   return (
     <DatePickerWrapper>
       <Grid container spacing={6}>

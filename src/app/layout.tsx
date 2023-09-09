@@ -2,15 +2,9 @@ import './globals.scss'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-// ** Utils Imports
-
-// ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css'
-
-// ** Global css styles
 import 'bootstrap/dist/css/bootstrap.min.css'
-import AppContextProviders from '@/@core/context/AppContextProviders'
+import ContextProviders from '@/@core/context/ContextProviders'
 import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body className={inter.className}>
         <Toaster position='top-center' reverseOrder={false} />
-        <AppContextProviders>{children}</AppContextProviders>
+        <ContextProviders>{children}</ContextProviders>
       </body>
     </html>
   )

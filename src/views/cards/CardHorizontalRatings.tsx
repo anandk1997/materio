@@ -1,4 +1,3 @@
-// ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Rating from '@mui/material/Rating'
@@ -8,41 +7,7 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Grid, { GridProps } from '@mui/material/Grid'
-
-// Styled Grid component
-const StyledGrid1 = styled(Grid)<GridProps>(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  [theme.breakpoints.down('md')]: {
-    paddingTop: '0 !important',
-  },
-  '& .MuiCardContent-root': {
-    padding: theme.spacing(3, 4.75),
-    [theme.breakpoints.down('md')]: {
-      paddingTop: 0,
-    },
-  },
-}))
-
-// Styled Grid component
-const StyledGrid2 = styled(Grid)<GridProps>(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  [theme.breakpoints.up('md')]: {
-    paddingLeft: '0 !important',
-  },
-  [theme.breakpoints.down('md')]: {
-    order: -1,
-  },
-}))
-
-// Styled component for the image
-const Img = styled('img')(({ theme }) => ({
-  height: '11rem',
-  borderRadius: theme.shape.borderRadius,
-}))
+import Image from 'next/image'
 
 const CardHorizontalRatings = () => {
   return (
@@ -82,7 +47,12 @@ const CardHorizontalRatings = () => {
               justifyContent: 'center',
             }}
           >
-            <Img alt='Stumptown Roasters' src='/images/cards/analog-clock.jpg' />
+            <Img
+              alt='Stumptown Roasters'
+              src='/images/cards/analog-clock.jpg'
+              width={200}
+              height={100}
+            />
           </CardContent>
         </StyledGrid2>
       </Grid>
@@ -91,3 +61,35 @@ const CardHorizontalRatings = () => {
 }
 
 export default CardHorizontalRatings
+
+const StyledGrid1 = styled(Grid)<GridProps>(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  [theme.breakpoints.down('md')]: {
+    paddingTop: '0 !important',
+  },
+  '& .MuiCardContent-root': {
+    padding: theme.spacing(3, 4.75),
+    [theme.breakpoints.down('md')]: {
+      paddingTop: 0,
+    },
+  },
+}))
+
+const StyledGrid2 = styled(Grid)<GridProps>(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  [theme.breakpoints.up('md')]: {
+    paddingLeft: '0 !important',
+  },
+  [theme.breakpoints.down('md')]: {
+    order: -1,
+  },
+}))
+
+const Img = styled(Image)(({ theme }) => ({
+  height: '11rem',
+  borderRadius: theme.shape.borderRadius,
+}))

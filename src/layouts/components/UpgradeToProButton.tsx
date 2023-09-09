@@ -1,19 +1,14 @@
-// ** React Import
 import { useState } from 'react'
-
-// ** MUI Imports
 import Box from '@mui/material/Box'
 import Fade from '@mui/material/Fade'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-
-// ** Third Party Imports
 import { usePopper } from 'react-popper'
+import Image from 'next/image'
 
 const BuyNowButton = () => {
-  // ** States
   const [open, setOpen] = useState<boolean>(false)
   const [popperElement, setPopperElement] = useState(null)
   const [referenceElement, setReferenceElement] = useState(null)
@@ -78,8 +73,10 @@ const BuyNowButton = () => {
               rel='noreferrer'
               href='https://themeselection.com/products/materio-mui-react-nextjs-admin-template/'
             >
-              <img
-                width='100%'
+              <Image
+                // width='100%'
+                width={100}
+                height={100}
                 alt='materio-pro-banner'
                 src='/images/misc/materio-pro-banner.png'
               />
