@@ -173,7 +173,12 @@ const TabSecurity = () => {
               justifyContent: 'center',
             }}
           >
-            <Image width={183} alt='avatar' height={256} src='/images/pages/pose-m-1.png' />
+            <Image
+              width={183}
+              alt='avatar'
+              height={256}
+              src='/images/pages/pose-m-1.png'
+            />
           </Grid>
         </Grid>
       </CardContent>

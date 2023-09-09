@@ -1,4 +1,4 @@
-const select =  {
+const select = {
   MuiSelect: {
     styleOverrides: {
       select: {
@@ -11,4 +11,4 @@ const select =  {
   },
 }
 
-export default   select
+export default select
