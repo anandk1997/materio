@@ -46,6 +46,11 @@ const UserDropdown = () => {
     },
   }
 
+  const logout = () => {
+    localStorage.removeItem('usertoken')
+    router.push('/login')
+  }
+
   return (
     <Fragment>
       <Badge
@@ -140,7 +145,7 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={() => handleDropdownClose('/pages/login')}>
+        <MenuItem sx={{ py: 2 }} onClick={logout}>
           <LogoutVariant
             sx={{
               marginRight: 2,

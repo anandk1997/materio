@@ -1,5 +1,6 @@
 'use client'
-import { ReactNode } from 'react'
+
+import { ReactNode, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import { Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -9,6 +10,7 @@ import UpgradeToProButton from './components/UpgradeToProButton'
 import VerticalAppBarContent from './components/vertical/AppBarContent'
 import { useSettings } from '@/@core/hooks/useSettings'
 import Image from 'next/image'
+import { redirect } from 'next/navigation'
 
 interface Props {
   children: ReactNode
@@ -36,6 +38,11 @@ const UserLayout = ({ children }: Props) => {
       </Box>
     )
   }
+
+  useEffect(() => {
+    const tokens = localStorage.getItem('usertoken')
+    if (!tokens) redirect('/login')
+  }, [])
 
   return (
     <VerticalLayout
