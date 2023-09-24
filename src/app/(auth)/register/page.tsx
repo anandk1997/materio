@@ -30,10 +30,9 @@ import { Signup, ErrorResponse, SuccessResponse } from '@/types/auth'
 import Buttons from '@/@core/components/Buttons'
 import { useRouter } from 'next/navigation'
 import { MaterioIcon } from '@/@core/Icons'
-import { useLoadingContext, useSetLoading } from '@/@core/context/LoadingContext'
+import { useLoadingContext } from '@/@core/context/LoadingContext'
 
 const RegisterPage = () => {
-  useSetLoading()
   const { setLoading } = useLoadingContext()
   const theme = useTheme()
   const router = useRouter()

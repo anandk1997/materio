@@ -1,4 +1,5 @@
 'use client'
+
 import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -30,10 +31,9 @@ import { useMutation } from '@tanstack/react-query'
 import { signIn } from '@/api/auth'
 import Buttons from '@/@core/components/Buttons'
 import { MaterioIcon } from '@/@core/Icons'
-import { useLoadingContext, useSetLoading } from '@/@core/context/LoadingContext'
+import { useLoadingContext } from '@/@core/context/LoadingContext'
 
 const LoginPage = () => {
-  useSetLoading()
   const { setLoading } = useLoadingContext()
   const theme = useTheme()
   const router = useRouter()

@@ -1,4 +1,5 @@
 'use client'
+
 import Grid from '@mui/material/Grid'
 import CardStatisticsVerticalComponent from '@/@core/components/card-statistics/card-stats-vertical'
 import ApexChartWrapper from '@/@core/styles/libs/react-apexcharts'
