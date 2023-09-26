@@ -102,7 +102,7 @@ const LoginPage = () => {
             </Typography>
           </Box>
 
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <TextField
               autoFocus
               fullWidth
@@ -237,7 +237,6 @@ LoginPage.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
 
 export default LoginPage
 
-// ** Styled Components
 const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '28rem' },
 }))

@@ -17,11 +17,12 @@ import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import { deleteCookie } from 'cookies-next'
 import { authToken } from '@/constants/auth'
+import { useLoadingContext } from '@/@core/context/LoadingContext'
 
 const UserDropdown = () => {
-  const [anchorEl, setAnchorEl] = useState<Element | null>(null)
-
   const router = useRouter()
+  const { setLoading } = useLoadingContext()
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null)
 
   const handleDropdownOpen = (event: SyntheticEvent) => {
     setAnchorEl(event.currentTarget)
@@ -49,6 +50,7 @@ const UserDropdown = () => {
   }
 
   const logout = () => {
+    setLoading(true)
     deleteCookie(authToken)
     router.push('/login')
   }
