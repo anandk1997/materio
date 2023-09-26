@@ -31,6 +31,8 @@ import Buttons from '@/@core/components/Buttons'
 import { useRouter } from 'next/navigation'
 import { MaterioIcon } from '@/@core/Icons'
 import { useLoadingContext } from '@/@core/context/LoadingContext'
+import { setCookie } from 'cookies-next'
+import { authToken } from '@/constants/auth'
 
 const RegisterPage = () => {
   const { setLoading } = useLoadingContext()
@@ -47,7 +49,8 @@ const RegisterPage = () => {
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
       toast.success(e.data.statusMessage ?? 'Registered Successfully')
-      localStorage.setItem('usertoken', e.data.data.token ?? '')
+      // localStorage.setItem('usertoken', e.data.data.token ?? '')
+      setCookie(authToken, e.data.data.token)
       router.push('/')
     },
   })

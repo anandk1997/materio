@@ -32,6 +32,8 @@ import { signIn } from '@/api/auth'
 import Buttons from '@/@core/components/Buttons'
 import { MaterioIcon } from '@/@core/Icons'
 import { useLoadingContext } from '@/@core/context/LoadingContext'
+import { setCookie } from 'cookies-next'
+import { authToken } from '@/constants/auth'
 
 const LoginPage = () => {
   const { setLoading } = useLoadingContext()
@@ -50,7 +52,7 @@ const LoginPage = () => {
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
       toast.success(e.data.statusMessage ?? 'Success')
-      localStorage.setItem('usertoken', e.data.data.token ?? '')
+      setCookie(authToken, e.data.data.token)
       router.push('/')
     },
   })

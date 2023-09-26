@@ -279,11 +279,6 @@ const navigation = (): VerticalNavItemsType => {
       icon: CubeOutline,
       path: '/form-layouts',
     },
-    // {
-    //   title: 'Logout',
-    //   icon: CubeOutline,
-    //   path: '/form-layouts',
-    // },
   ]
 }
 

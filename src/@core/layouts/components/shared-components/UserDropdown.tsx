@@ -15,6 +15,8 @@ import LogoutVariant from 'mdi-material-ui/LogoutVariant'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
+import { deleteCookie } from 'cookies-next'
+import { authToken } from '@/constants/auth'
 
 const UserDropdown = () => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null)
@@ -47,7 +49,7 @@ const UserDropdown = () => {
   }
 
   const logout = () => {
-    localStorage.removeItem('usertoken')
+    deleteCookie(authToken)
     router.push('/login')
   }
 
