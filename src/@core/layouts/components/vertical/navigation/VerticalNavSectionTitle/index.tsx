@@ -1,20 +1,16 @@
 import Divider from '@mui/material/Divider'
 import { styled, useTheme } from '@mui/material/styles'
 import Typography, { TypographyProps } from '@mui/material/Typography'
+import { KeyboardArrowUp, KeyboardArrowDown } from '@mui/icons-material'
 import MuiListSubheader, { ListSubheaderProps } from '@mui/material/ListSubheader'
 import { ColapsibleTitle, NavSectionTitle } from '@/@core/layouts/types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
-import { PropsWithChildren, useContext, useEffect, useState } from 'react'
+import { PropsWithChildren, ReactNode, useContext, useEffect, useState } from 'react'
 import VerticalNavLink from '../VerticalNavLink'
 import { ItemFunctionResult, ItemMenu } from '@/types/colapsibleMenu'
 import { Accordion, AccordionContext, Button, useAccordionButton } from 'react-bootstrap'
-import {
-  IconDefinition,
-  faChevronUp,
-  faChevronDown,
-} from '@fortawesome/free-solid-svg-icons'
 import styles from './VerticleNavSectionTitle.module.scss'
+import UserIcon from '@/layouts/components/UserIcon'
 
 const VerticalNavSectionTitle = ({ item }: Props) => {
   const theme = useTheme()
@@ -88,7 +84,7 @@ export const ColapsibleMenu = ({
 }
 
 type SidebarNavGroupProps = {
-  toggleIcon: IconDefinition
+  toggleIcon: ReactNode
   toggleText: string | undefined
 } & PropsWithChildren
 
@@ -116,7 +112,7 @@ const SidebarNavGroup = (props: SidebarNavGroupProps) => {
 
 type SidebarNavGroupToggleProps = {
   eventKey: string
-  icon: IconDefinition
+  icon: ReactNode
   setIsShow: (isShow: boolean) => void
   isShow: boolean
 } & PropsWithChildren
@@ -126,6 +122,7 @@ const SidebarNavGroupToggle = (props: SidebarNavGroupToggleProps) => {
   const { eventKey, icon, children, setIsShow, isShow } = props
   const decoratedOnClick = useAccordionButton(eventKey)
   const isCurrentEventKey = activeEventKey === eventKey
+  const IconTag: ReactNode = icon as ReactNode
 
   useEffect(() => {
     setIsShow(activeEventKey === eventKey)
@@ -143,10 +140,14 @@ const SidebarNavGroupToggle = (props: SidebarNavGroupToggleProps) => {
       )}
       onClick={decoratedOnClick}
     >
-      <FontAwesomeIcon className='nav-icon me-3' icon={icon} />
+      <span className='me-2'>
+        <UserIcon icon={IconTag} />
+      </span>
+
       {children}
+
       <div className='nav-chevron ms-auto text-end'>
-        <FontAwesomeIcon size='xs' icon={isShow ? faChevronUp : faChevronDown} />
+        {isShow ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
       </div>
     </Button>
   )

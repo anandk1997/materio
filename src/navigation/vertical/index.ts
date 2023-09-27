@@ -1,5 +1,4 @@
 import { VerticalNavItemsType } from '@/@core/layouts/types'
-import { faUser } from '@fortawesome/free-regular-svg-icons'
 import {
   Login,
   Table,
@@ -36,14 +35,11 @@ import {
   ConfirmationNumber,
   ForwardToInbox,
   Unarchive,
+  PeopleOutline,
+  ImportContacts,
+  Savings,
 } from '@mui/icons-material'
-import {
-  faDollarSign,
-  faUsersLine,
-  faBook,
-  faHandsBound,
-  faTicket,
-} from '@fortawesome/free-solid-svg-icons'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 const navigation = (): VerticalNavItemsType => {
   return [
@@ -63,7 +59,7 @@ const navigation = (): VerticalNavItemsType => {
 
     {
       colapsibleTitle: 'Profile',
-      icon: faUser,
+      icon: AccountCircleIcon,
       colapsibleMenu: [
         {
           subMenu: 'Edit Profile',
@@ -95,7 +91,7 @@ const navigation = (): VerticalNavItemsType => {
 
     {
       colapsibleTitle: 'USDT Account',
-      icon: faDollarSign,
+      icon: AttachMoney,
       colapsibleMenu: [
         {
           subMenu: 'Activate Now',
@@ -122,7 +118,7 @@ const navigation = (): VerticalNavItemsType => {
 
     {
       colapsibleTitle: 'Team Details',
-      icon: faUsersLine,
+      icon: PeopleOutline,
       colapsibleMenu: [
         {
           subMenu: 'My Partner Tree',
@@ -144,7 +140,7 @@ const navigation = (): VerticalNavItemsType => {
 
     {
       colapsibleTitle: 'Statement',
-      icon: faBook,
+      icon: ImportContacts,
       colapsibleMenu: [
         {
           subMenu: 'Direct Income',
@@ -176,7 +172,7 @@ const navigation = (): VerticalNavItemsType => {
 
     {
       colapsibleTitle: 'Fund Manager',
-      icon: faHandsBound,
+      icon: Savings,
       colapsibleMenu: [
         {
           subMenu: 'Deposit VMC BEP20',
@@ -213,7 +209,7 @@ const navigation = (): VerticalNavItemsType => {
 
     {
       colapsibleTitle: 'Support Ticket',
-      icon: faTicket,
+      icon: ConfirmationNumber,
       colapsibleMenu: [
         {
           subMenu: 'Create Ticket',
