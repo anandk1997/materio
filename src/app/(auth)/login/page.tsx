@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react'
+import { ChangeEvent, MouseEvent, ReactNode, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Box from '@mui/material/Box'
@@ -31,7 +31,7 @@ import { useMutation } from '@tanstack/react-query'
 import { signIn } from '@/api/auth'
 import Buttons from '@/@core/components/Buttons'
 import { MaterioIcon } from '@/@core/Icons'
-import { useLoadingContext } from '@/@core/context/LoadingContext'
+import { useIsLoading, useLoadingContext } from '@/@core/context/LoadingContext'
 import { setCookie } from 'cookies-next'
 import { authToken } from '@/constants/auth'
 
@@ -44,10 +44,10 @@ const LoginPage = () => {
     password: '',
   })
 
-  const handleChange = (prop: keyof Signin) => (event: ChangeEvent<HTMLInputElement>) =>
-    setValues({ ...values, [prop]: event.target.value })
+  const handleChange = (prop: keyof Signin) => (e: ChangeEvent<HTMLInputElement>) =>
+    setValues({ ...values, [prop]: e.target.value })
 
-  const { isLoading, mutate } = useMutation((data: Signin) => signIn(data), {
+  const { isLoading, mutate } = useMutation(signIn, {
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
@@ -62,9 +62,7 @@ const LoginPage = () => {
     mutate(values)
   }
 
-  useEffect(() => {
-    setLoading(isLoading)
-  }, [isLoading, setLoading])
+  useIsLoading(isLoading)
 
   return (
     <Box className='flex justify-center content-center align-items-center h-[100vh]'>

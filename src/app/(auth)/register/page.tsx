@@ -1,5 +1,6 @@
 'use client'
-import { useState, Fragment, ChangeEvent, MouseEvent, ReactNode, useEffect } from 'react'
+
+import { useState, Fragment, ChangeEvent, MouseEvent, ReactNode } from 'react'
 import Link from 'next/link'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
@@ -30,7 +31,7 @@ import { Signup, ErrorResponse, SuccessResponse } from '@/types/auth'
 import Buttons from '@/@core/components/Buttons'
 import { useRouter } from 'next/navigation'
 import { MaterioIcon } from '@/@core/Icons'
-import { useLoadingContext } from '@/@core/context/LoadingContext'
+import { useIsLoading, useLoadingContext } from '@/@core/context/LoadingContext'
 import { setCookie } from 'cookies-next'
 import { authToken } from '@/constants/auth'
 
@@ -49,7 +50,6 @@ const RegisterPage = () => {
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
       toast.success(e.data.statusMessage ?? 'Registered Successfully')
-      // localStorage.setItem('usertoken', e.data.data.token ?? '')
       setCookie(authToken, e.data.data.token)
       router.push('/')
     },
@@ -63,9 +63,7 @@ const RegisterPage = () => {
     mutate(values)
   }
 
-  useEffect(() => {
-    setLoading(isLoading)
-  }, [isLoading, setLoading])
+  useIsLoading(isLoading)
 
   return (
     <Box className='flex justify-center content-center align-items-center h-[100vh]'>

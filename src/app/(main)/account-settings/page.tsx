@@ -16,21 +16,13 @@ import TabAccount from '@/views/account-settings/TabAccount'
 import TabSecurity from '@/views/account-settings/TabSecurity'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSetLoading } from '@/@core/context/LoadingContext'
+import TabWalletAddress from '@/views/account-settings/TabWalletAddress'
 
 const AccountSettings = () => {
   useSetLoading()
   const [value, setValue] = useState<string>('account')
 
-  const handleChange = (event: SyntheticEvent, newValue: string) => {
-    setValue(newValue)
-  }
-
-  const customLabel = (label: React.ReactNode, Icon: React.FC) => (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Icon />
-      <TabName>{label}</TabName>
-    </Box>
-  )
+  const handleChange = (e: SyntheticEvent, newValue: string) => setValue(newValue)
 
   return (
     <Card>
@@ -44,6 +36,10 @@ const AccountSettings = () => {
         >
           <CustomTab value='account' label={customLabel('Account', AccountOutline)} />
           <CustomTab value='security' label={customLabel('Security', LockOpenOutline)} />
+          <CustomTab
+            value='walletAddress'
+            label={customLabel('Wallet Address', LockOpenOutline)}
+          />
           <CustomTab value='info' label={customLabel('Info', InformationOutline)} />
         </TabList>
 
@@ -53,6 +49,10 @@ const AccountSettings = () => {
 
         <TabPanel value='security'>
           <TabSecurity />
+        </TabPanel>
+
+        <TabPanel value='walletAddress'>
+          <TabWalletAddress />
         </TabPanel>
 
         <TabPanel value='info'>
@@ -90,3 +90,10 @@ const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
     minWidth: 67,
   },
 }))
+
+const customLabel = (label: React.ReactNode, Icon: React.FC) => (
+  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Icon />
+    <TabName>{label}</TabName>
+  </Box>
+)

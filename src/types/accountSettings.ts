@@ -13,3 +13,8 @@ export interface SuccessResponse {
     type: string
   }
 }
+
+export interface WalletAddress {
+  address: string
+  addressType: string
+}

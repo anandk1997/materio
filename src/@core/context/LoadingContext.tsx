@@ -63,3 +63,8 @@ export const useSetLoading = () => {
   const { setLoading } = useLoadingContext()
   useEffect(() => setLoading(false), [setLoading])
 }
+
+export const useIsLoading = (isLoading: boolean) => {
+  const { setLoading } = useLoadingContext()
+  useEffect(() => setLoading(isLoading), [isLoading, setLoading])
+}
