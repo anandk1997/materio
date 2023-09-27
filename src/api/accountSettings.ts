@@ -1,9 +1,20 @@
 import axios from 'axios'
 import { config, headers } from '@/configs/config'
-import { AccountSettings, WalletAddress } from '@/types/accountSettings'
+import {
+  AccountSettings,
+  FileFormData,
+  UpdatePassword,
+  WalletAddress,
+} from '@/types/accountSettings'
 
-export const editProfile = (params: AccountSettings) =>
-  axios.post(`${config.API_URL}/profile`, params, headers)
+export const editProfile = async (params: AccountSettings) =>
+  await axios.post(`${config.API_URL}/profile`, params, headers)
+
+export const updatePassword = async (params: UpdatePassword) =>
+  await axios.post(`${config.API_URL}/profile/password`, params, headers)
+
+export const uploadPic = async (params: FileFormData) =>
+  await axios.post(`${config.API_URL}/file/upload`, params, headers)
 
 export const walletAddress = async (params: WalletAddress) =>
-  axios.post(`${config.API_URL}/profile/walletAddress`, params, headers)
+  await axios.post(`${config.API_URL}/profile/walletAddress`, params, headers)

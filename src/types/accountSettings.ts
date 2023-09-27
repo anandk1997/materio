@@ -7,6 +7,19 @@ export interface AccountSettings {
   state: string
 }
 
+export interface UpdatePassword {
+  oldPassword: string
+  password: string
+  showNewPassword?: boolean
+  confirmNewPassword?: string
+  showCurrentPassword?: boolean
+  showConfirmNewPassword?: boolean
+}
+
+export interface FileFormData {
+  append(name: string, file: File, fileName?: string): void
+}
+
 export interface SuccessResponse {
   data: {
     statusCode: number

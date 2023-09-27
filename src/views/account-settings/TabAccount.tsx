@@ -18,10 +18,11 @@ import Close from 'mdi-material-ui/Close'
 import { ErrorResponse } from '@/types/auth'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
-import { editProfile } from '@/api/accountSettings'
+import { editProfile, uploadPic } from '@/api/accountSettings'
 import { AccountSettings, SuccessResponse } from '@/types/accountSettings'
 import Buttons from '@/@core/components/Buttons'
 import Image from 'next/image'
+import { useIsLoading } from '@/@core/context/LoadingContext'
 
 const init = {
   name: '',
@@ -44,6 +45,14 @@ const TabAccount = () => {
     },
   })
 
+  const { isLoading: uploadLoading, mutate: uploadMutate } = useMutation(uploadPic, {
+    onError: (e: ErrorResponse) =>
+      toast.error(e.response.data.statusMessage ?? 'Some Error!'),
+    onSuccess: (e: SuccessResponse) => {
+      toast.success(e.data.statusMessage ?? 'Success')
+    },
+  })
+
   const handleChange =
     (prop: keyof AccountSettings) =>
     (
@@ -56,20 +65,18 @@ const TabAccount = () => {
     mutate(values)
   }
 
-  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
+  const onChangeUpload = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    mutate(values)
-  }
+    const formData = new FormData()
 
-  const onChange = (file: ChangeEvent) => {
-    const reader = new FileReader()
-    const { files } = file.target as HTMLInputElement
-    if (files && files.length !== 0) {
-      reader.onload = () => setImgSrc(reader.result as string)
-
-      reader.readAsDataURL(files[0])
+    const file = e.target.files?.[0]
+    if (file) {
+      formData.append('file', file, file.name)
+      uploadMutate(formData)
     }
   }
+
+  useIsLoading(isLoading || uploadLoading)
 
   return (
     <CardContent>
@@ -78,32 +85,28 @@ const TabAccount = () => {
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
+
               <Box>
-                <ButtonStyled
+                <Buttons
                   component='label'
                   variant='contained'
+                  loading={uploadLoading}
+                  disabled={uploadLoading}
                   htmlFor='account-settings-upload-image'
+                  sx={{ marginRight: 3.5 }}
                 >
                   Upload New Photo
                   <input
                     hidden
                     type='file'
-                    onChange={onChange}
+                    onChange={onChangeUpload}
                     accept='image/png, image/jpeg'
                     id='account-settings-upload-image'
                   />
-                </ButtonStyled>
-
-                <ResetButtonStyled
-                  color='error'
-                  variant='outlined'
-                  onClick={() => setImgSrc('/images/avatars/1.png')}
-                >
-                  Reset
-                </ResetButtonStyled>
+                </Buttons>
 
                 <Typography variant='body2' sx={{ marginTop: 5 }}>
-                  Allowed PNG or JPEG. Max size of 800K.
+                  Allowed PNG or JPEG.
                 </Typography>
               </Box>
             </Box>
@@ -210,12 +213,12 @@ const ButtonStyled = styled(Button)<
   },
 }))
 
-const ResetButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
-  marginLeft: theme.spacing(4.5),
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    marginLeft: 0,
-    textAlign: 'center',
-    marginTop: theme.spacing(4),
-  },
-}))
+// const ResetButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
+//   marginLeft: theme.spacing(4.5),
+//   [theme.breakpoints.down('sm')]: {
+//     width: '100%',
+//     marginLeft: 0,
+//     textAlign: 'center',
+//     marginTop: theme.spacing(4),
+//   },
+// }))
