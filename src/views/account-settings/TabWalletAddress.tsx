@@ -13,6 +13,7 @@ import { ErrorResponse } from '@/types/auth'
 import { useIsLoading } from '@/@core/context/LoadingContext'
 import { toast } from 'react-hot-toast'
 import { walletAddress } from '@/api/accountSettings'
+import Buttons from '@/@core/components/Buttons'
 
 const TabWalletAddress = () => {
   const [values, setValues] = useState<WalletAddress>({
@@ -78,9 +79,15 @@ const TabWalletAddress = () => {
 
       <CardContent>
         <Box sx={{ mt: 11 }}>
-          <Button type='submit' variant='contained' sx={{ marginRight: 3.5 }}>
+          <Buttons
+            type='submit'
+            variant='contained'
+            loading={isLoading}
+            disabled={isLoading}
+            sx={{ marginRight: 3.5 }}
+          >
             Save Changes
-          </Button>
+          </Buttons>
         </Box>
       </CardContent>
     </form>

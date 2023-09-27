@@ -1,9 +1,10 @@
 export interface AccountSettings {
   name: string
   email: string
-  contact: string
+  phone: string
   country: string
-  status: string
+  // status: string
+  state: string
 }
 
 export interface SuccessResponse {

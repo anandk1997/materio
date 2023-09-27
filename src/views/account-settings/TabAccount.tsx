@@ -26,26 +26,24 @@ import Image from 'next/image'
 const init = {
   name: '',
   email: '',
-  contact: '',
+  phone: '',
   country: '',
-  status: '',
+  // status: '',
+  state: '',
 }
 
 const TabAccount = () => {
-  const [openAlert, setOpenAlert] = useState<boolean>(true)
   const [imgSrc, setImgSrc] = useState<string>('/images/avatars/1.png')
   const [values, setValues] = useState<AccountSettings>(init)
 
-  const { isLoading, mutate } = useMutation(
-    (data: AccountSettings) => editProfile(data),
-    {
-      onError: (e: ErrorResponse) =>
-        toast.error(e.response.data.statusMessage ?? 'Some Error!'),
-      onSuccess: (e: SuccessResponse) => {
-        toast.success(e.data.statusMessage ?? 'Success')
-      },
-    }
-  )
+  const { isLoading, mutate } = useMutation(editProfile, {
+    onError: (e: ErrorResponse) =>
+      toast.error(e.response.data.statusMessage ?? 'Some Error!'),
+    onSuccess: (e: SuccessResponse) => {
+      toast.success(e.data.statusMessage ?? 'Success')
+    },
+  })
+
   const handleChange =
     (prop: keyof AccountSettings) =>
     (
@@ -138,8 +136,8 @@ const TabAccount = () => {
               type='number'
               label='Contact Number'
               placeholder='Contact'
-              value={values.contact}
-              onChange={handleChange('contact')}
+              value={values.phone}
+              onChange={handleChange('phone')}
             />
           </Grid>
 
@@ -151,7 +149,7 @@ const TabAccount = () => {
                 value={values.country}
                 onChange={handleChange('country')}
               >
-                <MenuItem value='admin'>Admin</MenuItem>
+                <MenuItem value='India'>India</MenuItem>
                 <MenuItem value='author'>Author</MenuItem>
                 <MenuItem value='editor'>Editor</MenuItem>
                 <MenuItem value='maintainer'>Maintainer</MenuItem>
@@ -165,8 +163,10 @@ const TabAccount = () => {
               <InputLabel>Status</InputLabel>
               <Select
                 label='Status'
-                value={values.status}
-                onChange={handleChange('status')}
+                // value={values.status}
+                // onChange={handleChange('status')}
+                value={values.state}
+                onChange={handleChange('state')}
               >
                 <MenuItem value='active'>Active</MenuItem>
                 <MenuItem value='inactive'>Inactive</MenuItem>
@@ -174,32 +174,6 @@ const TabAccount = () => {
               </Select>
             </FormControl>
           </Grid>
-
-          {openAlert ? (
-            <Grid item xs={12} sx={{ mb: 3 }}>
-              <Alert
-                severity='warning'
-                sx={{ '& a': { fontWeight: 400 } }}
-                action={
-                  <IconButton
-                    size='small'
-                    color='inherit'
-                    aria-label='close'
-                    onClick={() => setOpenAlert(false)}
-                  >
-                    <Close fontSize='inherit' />
-                  </IconButton>
-                }
-              >
-                <AlertTitle>
-                  Your email is not confirmed. Please check your inbox.
-                </AlertTitle>
-                <Link href='/' onClick={(e: SyntheticEvent) => e.preventDefault()}>
-                  Resend Confirmation
-                </Link>
-              </Alert>
-            </Grid>
-          ) : null}
 
           <Grid item xs={12}>
             <Buttons
@@ -211,15 +185,6 @@ const TabAccount = () => {
             >
               Save Changes
             </Buttons>
-
-            <Button
-              type='reset'
-              variant='outlined'
-              color='secondary'
-              onClick={() => setValues(init)}
-            >
-              Reset
-            </Button>
           </Grid>
         </Grid>
       </form>
