@@ -2,7 +2,7 @@ import { authToken } from '@/constants/auth'
 import { getCookie } from 'cookies-next'
 
 export const config = {
-  API_URL: 'http://64.227.136.131:3005/api/v1',
+  API_URL: process.env.NEXT_PUBLIC_API_URL,
 }
 
 const cookieToken = getCookie(authToken)
