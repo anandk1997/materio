@@ -2,7 +2,6 @@
 
 import { ChangeEvent, MouseEvent, ReactNode, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
@@ -38,7 +37,6 @@ import { authToken } from '@/constants/auth'
 const LoginPage = () => {
   const { setLoading } = useLoadingContext()
   const theme = useTheme()
-  const router = useRouter()
   const [values, setValues] = useState<Signin>({
     userId: '',
     password: '',
@@ -53,7 +51,7 @@ const LoginPage = () => {
     onSuccess: (e: SuccessResponse) => {
       toast.success(e.data.statusMessage ?? 'Success')
       setCookie(authToken, e.data.data.token)
-      router.push('/')
+      window.location.href = '/'
     },
   })
 

@@ -52,7 +52,7 @@ const UserDropdown = () => {
   const logout = () => {
     setLoading(true)
     deleteCookie(authToken)
-    router.push('/login')
+    window.location.href = '/'
   }
 
   return (
