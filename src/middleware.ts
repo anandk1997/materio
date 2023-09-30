@@ -10,6 +10,7 @@ export function middleware(request: NextRequest) {
   if (isPublicPath && token) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }
+  if (path === '/') return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
   if (!isPublicPath && !token) {
     return NextResponse.redirect(new URL('/login', request.nextUrl))
   }
@@ -18,6 +19,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/',
+    '/dashboard',
     '/login',
     '/register',
     '/account-settings',
