@@ -7,6 +7,11 @@ export interface AccountSettings {
   state: string
 }
 
+export interface KYC {
+  file: File
+  fileName: string
+}
+
 export interface UpdatePassword {
   oldPassword: string
   password: string

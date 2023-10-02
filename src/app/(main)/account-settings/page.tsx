@@ -17,6 +17,7 @@ import TabSecurity from '@/views/account-settings/TabSecurity'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSetLoading } from '@/@core/context/LoadingContext'
 import TabWalletAddress from '@/views/account-settings/TabWalletAddress'
+import TabKYC from '@/views/account-settings/TabKYC'
 
 const AccountSettings = () => {
   useSetLoading()
@@ -37,9 +38,10 @@ const AccountSettings = () => {
           <CustomTab value='account' label={customLabel('Account', AccountOutline)} />
           <CustomTab value='security' label={customLabel('Security', LockOpenOutline)} />
           <CustomTab
-            value='walletAddress'
+            value='wallet'
             label={customLabel('Wallet Address', LockOpenOutline)}
           />
+          <CustomTab value='kyc' label={customLabel('Update KYC', LockOpenOutline)} />
           <CustomTab value='info' label={customLabel('Info', InformationOutline)} />
         </TabList>
 
@@ -51,8 +53,12 @@ const AccountSettings = () => {
           <TabSecurity />
         </TabPanel>
 
-        <TabPanel value='walletAddress'>
+        <TabPanel value='wallet'>
           <TabWalletAddress />
+        </TabPanel>
+
+        <TabPanel value='kyc'>
+          <TabKYC />
         </TabPanel>
 
         <TabPanel value='info'>
