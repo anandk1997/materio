@@ -23,9 +23,10 @@ import { AccountSettings, KYC, SuccessResponse } from '@/types/accountSettings'
 import Buttons from '@/@core/components/Buttons'
 import Image from 'next/image'
 import { useIsLoading } from '@/@core/context/LoadingContext'
+import KycCard from './KycCard'
 
 const init = {
-  file: new File([], 'dummy.txt', { type: 'text/plain' }),
+  file: null,
   fileName: '',
 }
 
@@ -103,53 +104,54 @@ const TabKYC = () => {
   useIsLoading(isLoading || uploadLoading)
 
   return (
-    <CardContent>
-      <Grid container spacing={7}>
-        <Grid item sm={12} md={6} sx={{ marginTop: 4.8, marginBottom: 3 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box>
-              <Typography
-                variant='body2'
-                //  sx={{ marginTop: 5 }}
-              >
-                Allowed PNG or JPEG.
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
+    <>
+      <div className='bg-green-950'>
+        <KycCard fileType='Adhar' loading={uploadLoading} imgSrc={imgSrc} />
+        <KycCard fileType='Adhar' loading={uploadLoading} imgSrc={imgSrc} />
+        <KycCard fileType='Adhar' loading={uploadLoading} imgSrc={imgSrc} />
 
-        <Grid item sm={12} md={6} sx={{ marginTop: 4.8, marginBottom: 3 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
+        <CardContent className='shadow-sm mt-5'>
+          <Grid container spacing={7}>
+            <Grid className='flex justify-center' item sm={4} xs={12}>
+              <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
+            </Grid>
 
-            <Box>
+            <Grid item sm={4} xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
+              <Box className='flex flex-col justify-center m-auto'>
+                <Box>
+                  <input
+                    type='file'
+                    className='file-input file-input-bordered flex m-auto'
+                    style={{ maxWidth: '70%' }}
+                  />
+
+                  <Typography
+                    className='flex justify-center'
+                    variant='body2'
+                    sx={{ marginTop: 5 }}
+                  >
+                    Allowed PNG or JPEG.
+                  </Typography>
+                </Box>
+              </Box>
+            </Grid>
+
+            <Grid item className='flex w-full justify-center m-auto' sm={4} xs={12}>
               <Buttons
                 component='label'
                 variant='contained'
                 loading={uploadLoading}
                 disabled={uploadLoading}
                 htmlFor='account-settings-upload-image'
-                sx={{ marginRight: 3.5 }}
+                sx={{ marginRight: 3.5, width: '50%' }}
               >
-                Choose File
-                <input
-                  hidden
-                  type='file'
-                  onChange={onChangeUpload}
-                  accept='image/png, image/jpeg'
-                  id='account-settings-upload-image'
-                />
+                Upload
               </Buttons>
+            </Grid>
+          </Grid>
 
-              <Typography variant='body2' sx={{ marginTop: 5 }}>
-                Allowed PNG or JPEG.
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
-
-      {/* <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+          <>
+            {/* <form noValidate autoComplete='off' onSubmit={handleSubmit}>
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -174,7 +176,7 @@ const TabKYC = () => {
                   />
                 </Buttons>
 
-                <Typography variant='body2' sx={{ marginTop: 5 }}>
+                <Typography className='flex justify-center' variant='body2' sx={{ marginTop: 5 }}>
                   Allowed PNG or JPEG.
                 </Typography>
               </Box>
@@ -230,7 +232,7 @@ const TabKYC = () => {
             </FormControl>
           </Grid>
 
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={4} xs={12}>
             <FormControl fullWidth>
               <InputLabel>Status</InputLabel>
               <Select
@@ -260,13 +262,16 @@ const TabKYC = () => {
           </Grid>
         </Grid>
       </form> */}
-    </CardContent>
+          </>
+        </CardContent>
+      </div>
+    </>
   )
 }
 
 export default TabKYC
 
-const ImgStyled = styled(Image)(({ theme }) => ({
+export const ImgStyled = styled(Image)(({ theme }) => ({
   width: 120,
   height: 120,
   marginRight: theme.spacing(6.25),

@@ -8,7 +8,7 @@ export interface AccountSettings {
 }
 
 export interface KYC {
-  file: File
+  file: any
   fileName: string
 }
 
@@ -22,7 +22,7 @@ export interface UpdatePassword {
 }
 
 export interface FileFormData {
-  append(name: string, file: File, fileName?: string): void
+  append(name: string, file: any, fileName?: string): void
 }
 
 export interface SuccessResponse {
@@ -36,4 +36,10 @@ export interface SuccessResponse {
 export interface WalletAddress {
   address: string
   addressType: string
+}
+
+export interface IKycCard {
+  imgSrc: any
+  loading: boolean
+  fileType: string
 }

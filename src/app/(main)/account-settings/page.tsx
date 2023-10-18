@@ -17,7 +17,8 @@ import TabSecurity from '@/views/account-settings/TabSecurity'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSetLoading } from '@/@core/context/LoadingContext'
 import TabWalletAddress from '@/views/account-settings/TabWalletAddress'
-import TabKYC from '@/views/account-settings/TabKYC'
+import TabKYC from '@/views/account-settings/TabKyc/TabKYC'
+import { Tooltip } from '@mui/material'
 
 const AccountSettings = () => {
   useSetLoading()
@@ -99,7 +100,10 @@ const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
 
 const customLabel = (label: React.ReactNode, Icon: React.FC) => (
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
-    <Icon />
+    <Tooltip title={label}>
+      <Icon />
+    </Tooltip>
+
     <TabName>{label}</TabName>
   </Box>
 )
