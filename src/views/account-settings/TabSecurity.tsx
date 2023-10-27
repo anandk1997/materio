@@ -34,20 +34,23 @@ const TabSecurity = () => {
   //   showConfirmNewPassword: false,
   // })
 
-  const [values, setValues] = useState<UpdatePassword>({
+  const init = {
     oldPassword: '',
     password: '',
     showNewPassword: false,
     confirmNewPassword: '',
     showCurrentPassword: false,
     showConfirmNewPassword: false,
-  })
+  }
+
+  const [values, setValues] = useState<UpdatePassword>(init)
 
   const { isLoading, mutate } = useMutation(updatePassword, {
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
       toast.success(e.data.statusMessage ?? 'Success')
+      setValues(init)
     },
   })
 

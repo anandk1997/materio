@@ -3,11 +3,15 @@ import { config, headers } from '@/configs/config'
 import {
   AccountSettings,
   FileFormData,
+  KYC,
   UpdatePassword,
   WalletAddress,
 } from '@/types/accountSettings'
 
 export const editProfile = async (params: AccountSettings) =>
+  await axios.post(`${config.API_URL}/profile`, params, headers)
+
+export const updateKYC = async (params: KYC) =>
   await axios.post(`${config.API_URL}/profile`, params, headers)
 
 export const updatePassword = async (params: UpdatePassword) =>
