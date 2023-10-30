@@ -2,7 +2,8 @@
 
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import { LinearProgress } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import NextTopLoader from 'nextjs-toploader'
+// import { makeStyles } from '@mui/styles'
 
 export const LoadingContext = createContext<
   | { loading: boolean; setLoading: React.Dispatch<React.SetStateAction<boolean>> }
@@ -12,25 +13,25 @@ export const LoadingContext = createContext<
 export const LoadingProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false)
 
-  const useStyles = makeStyles(() => ({
-    loader: {
-      zIndex: '999999 !important',
-      margin: 0,
-      top: 0,
-      right: 0,
-      bottom: 'auto',
-      width: '100%',
-      position: 'fixed',
-    },
-    root: {
-      backgroundColor: '#9155FD !important',
-    },
-    bar: {
-      backgroundColor: '#b74acd !important',
-    },
-  }))
+  // const useStyles = makeStyles(() => ({
+  //   loader: {
+  //     zIndex: '999999 !important',
+  //     margin: 0,
+  //     top: 0,
+  //     right: 0,
+  //     bottom: 'auto',
+  //     width: '100%',
+  //     position: 'fixed',
+  //   },
+  //   root: {
+  //     backgroundColor: '#9155FD !important',
+  //   },
+  //   bar: {
+  //     backgroundColor: '#b74acd !important',
+  //   },
+  // }))
 
-  const classes = useStyles()
+  // const classes = useStyles()
 
   const defaultContext = {
     loading,
@@ -39,15 +40,14 @@ export const LoadingProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <LoadingContext.Provider value={defaultContext}>
-      {loading && (
-        <LinearProgress
+      {loading && <NextTopLoader />}
+      {/* <LinearProgress
           classes={{
             root: classes.root,
             bar: classes.bar,
           }}
           className={classes.loader}
-        />
-      )}
+        /> */}
       {children}
     </LoadingContext.Provider>
   )
@@ -64,7 +64,7 @@ export const useSetLoading = () => {
   useEffect(() => setLoading(false), [setLoading])
 }
 
-export const useIsLoading = (isLoading: boolean) => {
+export const useIsLoading = (isPending: boolean) => {
   const { setLoading } = useLoadingContext()
-  useEffect(() => setLoading(isLoading), [isLoading, setLoading])
+  useEffect(() => setLoading(isPending), [isPending, setLoading])
 }

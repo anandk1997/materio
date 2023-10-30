@@ -25,7 +25,8 @@ const TabWalletAddress = () => {
     (prop: keyof WalletAddress) => (e: ChangeEvent<HTMLInputElement>) =>
       setValues({ ...values, [prop]: e.target.value })
 
-  const { isLoading, mutate } = useMutation(walletAddress, {
+  const { isPending, mutate } = useMutation({
+    mutationFn: walletAddress,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => toast.success(e.data.statusMessage ?? 'Success'),
@@ -37,7 +38,7 @@ const TabWalletAddress = () => {
     else mutate(values)
   }
 
-  useIsLoading(isLoading)
+  useIsLoading(isPending)
 
   return (
     <form onSubmit={handleSubmit}>
@@ -82,8 +83,8 @@ const TabWalletAddress = () => {
           <Buttons
             type='submit'
             variant='contained'
-            loading={isLoading}
-            disabled={isLoading}
+            loading={isPending}
+            disabled={isPending}
             sx={{ marginRight: 3.5 }}
           >
             Save Changes

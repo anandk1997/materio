@@ -34,7 +34,8 @@ const TabKYC = () => {
   const [imgSrc, setImgSrc] = useState<string>('/images/avatars/1.png')
   const [values, setValues] = useState<KYC>(init)
 
-  const { isLoading, mutate } = useMutation(updateKYC, {
+  const { isPending, mutate } = useMutation({
+    mutationFn: updateKYC,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
@@ -42,7 +43,8 @@ const TabKYC = () => {
     },
   })
 
-  const { isLoading: uploadLoading, mutate: uploadMutate } = useMutation(uploadPic, {
+  const { isPending: uploadLoading, mutate: uploadMutate } = useMutation({
+    mutationFn: uploadPic,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
@@ -101,7 +103,7 @@ const TabKYC = () => {
     }
   }
 
-  useIsLoading(isLoading || uploadLoading)
+  useIsLoading(isPending || uploadLoading)
 
   return (
     <>
@@ -253,8 +255,8 @@ const TabKYC = () => {
             <Buttons
               type='submit'
               variant='contained'
-              loading={isLoading}
-              disabled={isLoading}
+              loading={isPending}
+              disabled={isPending}
               sx={{ marginRight: 3.5 }}
             >
               Save Changes
