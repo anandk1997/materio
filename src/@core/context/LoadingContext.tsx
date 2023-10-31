@@ -51,12 +51,10 @@ export const useSetLoading = () => {
 }
 
 export const useIsLoading = (isPending: boolean) => {
-  const { setLoading, setProgress } = useLoadingContext()
+  const { loading, setLoading, setProgress } = useLoadingContext()
 
-  useEffect(
-    () => (isPending ? setProgress(val => val + 10) : setProgress(100)),
-    [isPending]
-  )
-
-  useEffect(() => setLoading(isPending), [isPending, setLoading])
+  useEffect(() => {
+    setLoading(isPending)
+    return isPending || loading ? setProgress(val => val + 10) : setProgress(100)
+  }, [isPending, loading, setProgress, setLoading])
 }

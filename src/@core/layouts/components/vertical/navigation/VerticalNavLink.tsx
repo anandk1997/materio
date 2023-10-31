@@ -13,13 +13,11 @@ import themeConfig from '@/configs/themeConfig'
 import { NavLink } from '@/@core/layouts/types'
 import { Settings } from '@/@core/context/settingsContext'
 import UserIcon from '@/layouts/components/UserIcon'
-import { useLoadingContext } from '@/@core/context/LoadingContext'
 
 const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
   const pathname = usePathname()
   const IconTag: ReactNode = item.icon as ReactNode
   const verifyPath = pathname === item.path
-  const { setLoading } = useLoadingContext()
 
   const onLinkClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!item.path) {
@@ -27,7 +25,6 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
       e.stopPropagation()
     }
     if (navVisible) toggleNavVisibility()
-    if (!verifyPath) setLoading(true)
   }
 
   return (

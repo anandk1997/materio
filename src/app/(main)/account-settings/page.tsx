@@ -24,7 +24,7 @@
 //   useSetLoading()
 //   const [value, setValue] = useState<string>('account')
 
-//   const handleChange = (e: SyntheticEvent, newValue: string) => setValue(newValue)
+//   const handleChange = (e: SyntheticEvent, i: string) => setValue(i)
 
 //   return (
 //     <Card>
@@ -101,7 +101,7 @@
 
 // ..................................................
 
-import * as React from 'react'
+import React, { SyntheticEvent } from 'react'
 import MuiTab, { TabProps } from '@mui/material/Tab'
 import {
   Card,
@@ -123,22 +123,20 @@ import { useSetLoading } from '@/@core/context/LoadingContext'
 interface TabPanelProps {
   children?: React.ReactNode
   index: number
-  value: number
+  tab: number
 }
 
 const AccountSettings = () => {
-  const [value, setValue] = React.useState(0)
+  const [tab, setValue] = React.useState(0)
   useSetLoading()
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
+  const handleChange = (e: SyntheticEvent, i: number) => setValue(i)
 
   return (
     <Card>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label='basic tabs example'>
+          <Tabs value={tab} onChange={handleChange} aria-label='basic tabs example'>
             <Tab label={customLabel('Account', AccountOutline)} {...a11yProps(0)} />
             <Tab label={customLabel('Security', LockOpenOutline)} {...a11yProps(1)} />
             <Tab
@@ -150,23 +148,23 @@ const AccountSettings = () => {
           </Tabs>
         </Box>
 
-        <CustomTabPanel value={value} index={0}>
+        <CustomTabPanel tab={tab} index={0}>
           <TabAccount />
         </CustomTabPanel>
 
-        <CustomTabPanel value={value} index={1}>
+        <CustomTabPanel tab={tab} index={1}>
           <TabSecurity />
         </CustomTabPanel>
 
-        <CustomTabPanel value={value} index={2}>
+        <CustomTabPanel tab={tab} index={2}>
           <TabWalletAddress />
         </CustomTabPanel>
 
-        <CustomTabPanel value={value} index={2}>
+        <CustomTabPanel tab={tab} index={3}>
           <TabKYC />
         </CustomTabPanel>
 
-        <CustomTabPanel value={value} index={2}>
+        <CustomTabPanel tab={tab} index={4}>
           <TabInfo />
         </CustomTabPanel>
       </Box>
@@ -176,22 +174,18 @@ const AccountSettings = () => {
 
 export default AccountSettings
 
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props
+const CustomTabPanel = (props: TabPanelProps) => {
+  const { children, tab, index, ...other } = props
 
   return (
     <div
       role='tabpanel'
-      hidden={value !== index}
+      hidden={tab !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {tab === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   )
 }
