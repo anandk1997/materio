@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body className={inter.className}>
         <Toaster position='top-center' reverseOrder={false} />
-        <NextTopLoader />
+        <NextTopLoader color={`#9155FD !important`} />
 
         <ContextProviders>{children}</ContextProviders>
       </body>

@@ -118,6 +118,7 @@ import TabSecurity from '@/views/account-settings/TabSecurity'
 import TabWalletAddress from '@/views/account-settings/TabWalletAddress'
 import TabKYC from '@/views/account-settings/TabKyc/TabKYC'
 import TabInfo from '@/views/account-settings/TabInfo'
+import { useSetLoading } from '@/@core/context/LoadingContext'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -125,8 +126,9 @@ interface TabPanelProps {
   value: number
 }
 
-export default function BasicTabs() {
+const AccountSettings = () => {
   const [value, setValue] = React.useState(0)
+  useSetLoading()
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
@@ -171,6 +173,8 @@ export default function BasicTabs() {
     </Card>
   )
 }
+
+export default AccountSettings
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props

@@ -1,53 +1,39 @@
 'use client'
 
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react'
-import { LinearProgress } from '@mui/material'
-import NextTopLoader from 'nextjs-toploader'
-// import { makeStyles } from '@mui/styles'
+import LoadingBar from 'react-top-loading-bar'
 
 export const LoadingContext = createContext<
-  | { loading: boolean; setLoading: React.Dispatch<React.SetStateAction<boolean>> }
+  | {
+      loading: boolean
+      setLoading: React.Dispatch<React.SetStateAction<boolean>>
+      progress: number
+      setProgress: React.Dispatch<React.SetStateAction<number>>
+    }
   | undefined
 >(undefined)
 
 export const LoadingProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false)
-
-  // const useStyles = makeStyles(() => ({
-  //   loader: {
-  //     zIndex: '999999 !important',
-  //     margin: 0,
-  //     top: 0,
-  //     right: 0,
-  //     bottom: 'auto',
-  //     width: '100%',
-  //     position: 'fixed',
-  //   },
-  //   root: {
-  //     backgroundColor: '#9155FD !important',
-  //   },
-  //   bar: {
-  //     backgroundColor: '#b74acd !important',
-  //   },
-  // }))
-
-  // const classes = useStyles()
+  const [progress, setProgress] = useState(0)
 
   const defaultContext = {
     loading,
     setLoading,
+    progress,
+    setProgress,
   }
 
   return (
     <LoadingContext.Provider value={defaultContext}>
-      {loading && <NextTopLoader />}
-      {/* <LinearProgress
-          classes={{
-            root: classes.root,
-            bar: classes.bar,
-          }}
-          className={classes.loader}
-        /> */}
+      <LoadingBar
+        // color='#f11946'
+        color='#9155FD'
+        height={3}
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+
       {children}
     </LoadingContext.Provider>
   )
@@ -65,6 +51,12 @@ export const useSetLoading = () => {
 }
 
 export const useIsLoading = (isPending: boolean) => {
-  const { setLoading } = useLoadingContext()
+  const { setLoading, setProgress } = useLoadingContext()
+
+  useEffect(
+    () => (isPending ? setProgress(val => val + 10) : setProgress(100)),
+    [isPending]
+  )
+
   useEffect(() => setLoading(isPending), [isPending, setLoading])
 }
