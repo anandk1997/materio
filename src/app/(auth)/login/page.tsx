@@ -59,6 +59,8 @@ const LoginPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     mutate(values)
+    setCookie(authToken, 'uyuy')
+    window.location.reload()
   }
 
   useIsLoading(isPending)
