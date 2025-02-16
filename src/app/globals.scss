@@ -41,4 +41,5 @@ code[class*='language-'] {
 .css-eglki6-MuiLinearProgress-root,
 .MuiLinearProgress-root {
   position: fixed !important;
+  z-index: 9999999999999999999999 !important;
 }

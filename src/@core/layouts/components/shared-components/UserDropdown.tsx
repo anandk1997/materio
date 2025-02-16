@@ -17,7 +17,7 @@ import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import { deleteCookie } from 'cookies-next'
 import { authToken } from '@/constants/auth'
-import { useLoadingContext } from '@/@core/context/LoadingContext'
+import { useIsLoading, useLoadingContext } from '@/@core/context/LoadingContext'
 
 const UserDropdown = () => {
   const router = useRouter()
@@ -52,8 +52,11 @@ const UserDropdown = () => {
   const logout = () => {
     setLoading(true)
     deleteCookie(authToken)
-    window.location.href = '/'
+    window.location.reload()
+    setTimeout(() => setLoading(false), 1000)
   }
+
+  useIsLoading(false)
 
   return (
     <Fragment>

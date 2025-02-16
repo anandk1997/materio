@@ -45,7 +45,8 @@ const RegisterPage = () => {
     name: '',
   })
 
-  const { isLoading, mutate } = useMutation(signUp, {
+  const { isPending, mutate } = useMutation({
+    mutationFn: signUp,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
@@ -63,7 +64,7 @@ const RegisterPage = () => {
     mutate(values)
   }
 
-  useIsLoading(isLoading)
+  useIsLoading(isPending)
 
   return (
     <Box className='flex justify-center content-center align-items-center h-[100vh]'>
@@ -152,8 +153,8 @@ const RegisterPage = () => {
               size='large'
               type='submit'
               variant='contained'
-              loading={isLoading}
-              disabled={isLoading}
+              loading={isPending}
+              disabled={isPending}
               sx={{ marginBottom: 7, background: theme.palette.primary.main }}
             >
               Sign up

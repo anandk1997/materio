@@ -45,7 +45,8 @@ const TabSecurity = () => {
 
   const [values, setValues] = useState<UpdatePassword>(init)
 
-  const { isLoading, mutate } = useMutation(updatePassword, {
+  const { isPending, mutate } = useMutation({
+    mutationFn: updatePassword,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
@@ -81,7 +82,7 @@ const TabSecurity = () => {
       })
   }
 
-  useIsLoading(isLoading)
+  useIsLoading(isPending)
 
   return (
     <form onSubmit={handleSubmit}>
@@ -211,8 +212,8 @@ const TabSecurity = () => {
           <Buttons
             type='submit'
             variant='contained'
-            loading={isLoading}
-            disabled={isLoading}
+            loading={isPending}
+            disabled={isPending}
             sx={{ marginRight: 3.5 }}
           >
             Save Changes

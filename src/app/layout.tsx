@@ -6,6 +6,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ContextProviders from '@/@core/context/ContextProviders'
 import { Toaster } from 'react-hot-toast'
+import NextTopLoader from 'nextjs-toploader'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body className={inter.className}>
         <Toaster position='top-center' reverseOrder={false} />
+        <NextTopLoader color={`#9155FD !important`} />
+
         <ContextProviders>{children}</ContextProviders>
       </body>
     </html>

@@ -45,7 +45,8 @@ const LoginPage = () => {
   const handleChange = (prop: keyof Signin) => (e: ChangeEvent<HTMLInputElement>) =>
     setValues({ ...values, [prop]: e.target.value })
 
-  const { isLoading, mutate } = useMutation(signIn, {
+  const { isPending, mutate } = useMutation({
+    mutationFn: signIn,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
     onSuccess: (e: SuccessResponse) => {
@@ -58,9 +59,11 @@ const LoginPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     mutate(values)
+    setCookie(authToken, 'uyuy')
+    window.location.reload()
   }
 
-  useIsLoading(isLoading)
+  useIsLoading(isPending)
 
   return (
     <Box className='flex justify-center content-center align-items-center h-[100vh]'>
@@ -145,7 +148,7 @@ const LoginPage = () => {
               size='large'
               type='submit'
               variant='contained'
-              loading={isLoading}
+              loading={isPending}
               sx={{ marginBottom: 7 }}
             >
               Login

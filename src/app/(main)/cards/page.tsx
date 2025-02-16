@@ -12,10 +12,10 @@ import CardLinkedIn from '@/views/cards/CardLinkedIn'
 import CardAppleWatch from '@/views/cards/CardAppleWatch'
 import CardMembership from '@/views/cards/CardMembership'
 import CardInfluencer from '@/views/cards/CardInfluencer'
-import CardNavigation from '@/views/cards/CardNavigation'
+// import CardNavigation from '@/views/cards/CardNavigation'
 import CardWithCollapse from '@/views/cards/CardWithCollapse'
 import CardVerticalRatings from '@/views/cards/CardVerticalRatings'
-import CardNavigationCenter from '@/views/cards/CardNavigationCenter'
+// import CardNavigationCenter from '@/views/cards/CardNavigationCenter'
 import CardHorizontalRatings from '@/views/cards/CardHorizontalRatings'
 import { useSetLoading } from '@/@core/context/LoadingContext'
 
@@ -61,10 +61,10 @@ const CardBasic = () => {
         <Typography variant='h5'>Navigation Cards</Typography>
       </Grid>
       <Grid item xs={12} md={6}>
-        <CardNavigation />
+        {/* <CardNavigation /> */}
       </Grid>
       <Grid item xs={12} md={6}>
-        <CardNavigationCenter />
+        {/* <CardNavigationCenter /> */}
       </Grid>
       <Grid item xs={12} sx={{ pb: 4, pt: theme => `${theme.spacing(17.5)} !important` }}>
         <Typography variant='h5'>Solid Cards</Typography>
