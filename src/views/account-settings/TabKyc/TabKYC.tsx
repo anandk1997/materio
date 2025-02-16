@@ -1,40 +1,31 @@
-import { useState, ElementType, ChangeEvent, SyntheticEvent } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
-import Alert from '@mui/material/Alert'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
+// import { SelectChangeEvent } from '@mui/material/Select'
 import { styled } from '@mui/material/styles'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import InputLabel from '@mui/material/InputLabel'
-import AlertTitle from '@mui/material/AlertTitle'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-import FormControl from '@mui/material/FormControl'
-import Button, { ButtonProps } from '@mui/material/Button'
-import Close from 'mdi-material-ui/Close'
 import { ErrorResponse } from '@/types/auth'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
 import { updateKYC, uploadPic } from '@/api/accountSettings'
-import { AccountSettings, KYC, SuccessResponse } from '@/types/accountSettings'
+import { SuccessResponse } from '@/types/accountSettings'
 import Buttons from '@/@core/components/Buttons'
 import Image from 'next/image'
 import { useIsLoading } from '@/@core/context/LoadingContext'
 import KycCard from './KycCard'
 
-const init = {
-  file: null,
-  fileName: '',
-}
+// const init = {
+//   file: null,
+//   fileName: '',
+// }
 
 const TabKYC = () => {
-  const [imgSrc, setImgSrc] = useState<string>('/images/avatars/1.png')
-  const [values, setValues] = useState<KYC>(init)
+  // const [values, setValues] = useState<KYC>(init)
 
-  const { isPending, mutate } = useMutation({
+  const {
+    isPending,
+    // mutate
+  } = useMutation({
     mutationFn: updateKYC,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
@@ -43,7 +34,10 @@ const TabKYC = () => {
     },
   })
 
-  const { isPending: uploadLoading, mutate: uploadMutate } = useMutation({
+  const {
+    isPending: uploadLoading,
+    //  mutate: uploadMutate
+  } = useMutation({
     mutationFn: uploadPic,
     onError: (e: ErrorResponse) =>
       toast.error(e.response.data.statusMessage ?? 'Some Error!'),
@@ -52,70 +46,87 @@ const TabKYC = () => {
     },
   })
 
-  const handleChange =
-    (prop: keyof AccountSettings) =>
-    (
-      e: SelectChangeEvent<string> | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) =>
-      setValues({ ...values, [prop]: e.target.value })
+  // const handleChange =
+  //   (prop: keyof AccountSettings) =>
+  //   (
+  //     e: SelectChangeEvent<string> | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  //   ) =>
+  //     setValues({ ...values, [prop]: e.target.value })
 
-  const getImageDetails = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
+  // const getImageDetails = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const selectedFile = e.target.files?.[0]
 
-    if (selectedFile) {
-      setValues({
-        ...values,
-        file: selectedFile,
-        fileName: selectedFile.name,
-      })
-    }
-  }
+  //   if (selectedFile) {
+  //     setValues({
+  //       ...values,
+  //       file: selectedFile,
+  //       fileName: selectedFile.name,
+  //     })
+  //   }
+  // }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
 
-    const formData = new FormData()
-    const fileInput =
-      e.currentTarget.querySelector<HTMLInputElement>('input[name="file"]')
+  //   const formData = new FormData()
+  //   const fileInput =
+  //     e.currentTarget.querySelector<HTMLInputElement>('input[name="file"]')
 
-    if (fileInput?.files?.[0]) {
-      formData.append('file', fileInput.files[0], fileInput.files[0].name)
+  //   if (fileInput?.files?.[0]) {
+  //     formData.append('file', fileInput.files[0], fileInput.files[0].name)
 
-      const kycData: KYC = {
-        file: formData.get('file') as File,
-        fileName: fileInput.files[0].name,
-      }
+  //     const kycData: KYC = {
+  //       file: formData.get('file') as File,
+  //       fileName: fileInput.files[0].name,
+  //     }
 
-      mutate(kycData)
-    } else {
-      console.error('No file selected.')
-    }
-  }
+  //     mutate(kycData)
+  //   } else {
+  //     console.error('No file selected.')
+  //   }
+  // }
 
-  const onChangeUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    const formData = new FormData()
+  // const onChangeUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault()
+  //   const formData = new FormData()
 
-    const file = e.target.files?.[0]
-    if (file) {
-      formData.append('file', file, file.name)
-      uploadMutate(formData)
-    }
-  }
+  //   const file = e.target.files?.[0]
+  //   if (file) {
+  //     formData.append('file', file, file.name)
+  //     uploadMutate(formData)
+  //   }
+  // }
 
   useIsLoading(isPending || uploadLoading)
 
   return (
     <>
       <div className='bg-green-950'>
-        <KycCard fileType='Adhar' loading={uploadLoading} imgSrc={imgSrc} />
-        <KycCard fileType='Adhar' loading={uploadLoading} imgSrc={imgSrc} />
-        <KycCard fileType='Adhar' loading={uploadLoading} imgSrc={imgSrc} />
+        <KycCard
+          fileType='Adhar'
+          loading={uploadLoading}
+          imgSrc={'/images/avatars/1.png'}
+        />
+        <KycCard
+          fileType='Adhar'
+          loading={uploadLoading}
+          imgSrc={'/images/avatars/1.png'}
+        />
+        <KycCard
+          fileType='Adhar'
+          loading={uploadLoading}
+          imgSrc={'/images/avatars/1.png'}
+        />
 
         <CardContent className='shadow-sm mt-5'>
           <Grid container spacing={7}>
             <Grid className='flex justify-center' item sm={4} xs={12}>
-              <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
+              <ImgStyled
+                src={'/images/avatars/1.png'}
+                alt='Profile Pic'
+                width={100}
+                height={100}
+              />
             </Grid>
 
             <Grid item sm={4} xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
@@ -157,7 +168,7 @@ const TabKYC = () => {
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
+              <ImgStyled src={"/images/avatars/1.png"} alt='Profile Pic' width={100} height={100} />
 
               <Box>
                 <Buttons
@@ -280,14 +291,14 @@ export const ImgStyled = styled(Image)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }))
 
-const ButtonStyled = styled(Button)<
-  ButtonProps & { component?: ElementType; htmlFor?: string }
->(({ theme }) => ({
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    textAlign: 'center',
-  },
-}))
+// const ButtonStyled = styled(Button)<
+//   ButtonProps & { component?: ElementType; htmlFor?: string }
+// >(({ theme }) => ({
+//   [theme.breakpoints.down('sm')]: {
+//     width: '100%',
+//     textAlign: 'center',
+//   },
+// }))
 
 // const ResetButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
 //   marginLeft: theme.spacing(4.5),

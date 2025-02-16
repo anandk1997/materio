@@ -103,14 +103,7 @@
 
 import React, { SyntheticEvent } from 'react'
 import MuiTab, { TabProps } from '@mui/material/Tab'
-import {
-  Card,
-  Tooltip,
-  Tabs,
-  //  Tab,
-  Typography,
-  Box,
-} from '@mui/material'
+import { Card, Tooltip, Tabs, Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { AccountOutline, InformationOutline, LockOpenOutline } from 'mdi-material-ui'
 import TabAccount from '@/views/account-settings/TabAccount'

@@ -17,7 +17,6 @@ import { Settings } from '@/@core/context/settingsContext'
 import ModeToggler from '@/@core/layouts/components/shared-components/ModeToggler'
 import UserDropdown from '@/@core/layouts/components/shared-components/UserDropdown'
 import NotificationDropdown from '@/@core/layouts/components/shared-components/NotificationDropdown'
-import Image from 'next/image'
 
 interface Props {
   hidden: boolean

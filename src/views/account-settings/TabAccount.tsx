@@ -1,20 +1,14 @@
-import { useState, ElementType, ChangeEvent, SyntheticEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
-import Alert from '@mui/material/Alert'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import InputLabel from '@mui/material/InputLabel'
-import AlertTitle from '@mui/material/AlertTitle'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
-import Button, { ButtonProps } from '@mui/material/Button'
-import Close from 'mdi-material-ui/Close'
 import { ErrorResponse } from '@/types/auth'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
@@ -34,7 +28,6 @@ const init = {
 }
 
 const TabAccount = () => {
-  const [imgSrc, setImgSrc] = useState<string>('/images/avatars/1.png')
   const [values, setValues] = useState<AccountSettings>(init)
 
   const { isPending, mutate } = useMutation({
@@ -86,7 +79,12 @@ const TabAccount = () => {
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <ImgStyled src={imgSrc} alt='Profile Pic' width={100} height={100} />
+              <ImgStyled
+                src={'/images/avatars/1.png'}
+                alt='Profile Pic'
+                width={100}
+                height={100}
+              />
 
               <Box>
                 <Buttons
@@ -206,14 +204,14 @@ const ImgStyled = styled(Image)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }))
 
-const ButtonStyled = styled(Button)<
-  ButtonProps & { component?: ElementType; htmlFor?: string }
->(({ theme }) => ({
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    textAlign: 'center',
-  },
-}))
+// const ButtonStyled = styled(Button)<
+//   ButtonProps & { component?: ElementType; htmlFor?: string }
+// >(({ theme }) => ({
+//   [theme.breakpoints.down('sm')]: {
+//     width: '100%',
+//     textAlign: 'center',
+//   },
+// }))
 
 // const ResetButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
 //   marginLeft: theme.spacing(4.5),
