@@ -31,8 +31,11 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
     <ListItem
       disablePadding
       className='nav-link'
-      disabled={item.disabled || false}
-      sx={{ mt: 1.5, px: '0 !important' }}
+      sx={{
+        mt: 1.5,
+        px: '0 !important',
+        ...(item.disabled && { opacity: 0.5, pointerEvents: 'none' }),
+      }}
     >
       <Link
         passHref

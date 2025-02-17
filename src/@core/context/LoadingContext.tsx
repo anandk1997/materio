@@ -25,7 +25,7 @@ export const LoadingProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <LoadingContext.Provider value={defaultContext}>
+    <LoadingContext value={defaultContext}>
       <LoadingBar
         // color='#f11946'
         color='#9155FD'
@@ -35,7 +35,7 @@ export const LoadingProvider = ({ children }: { children: ReactNode }) => {
       />
 
       {children}
-    </LoadingContext.Provider>
+    </LoadingContext>
   )
 }
 

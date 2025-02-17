@@ -30,11 +30,5 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
   const [settings, setSettings] = useState<Settings>({ ...initialSettings })
   const saveSettings = (updatedSettings: Settings) => setSettings(updatedSettings)
 
-  return (
-    <SettingsContext.Provider value={{ settings, saveSettings }}>
-      {children}
-    </SettingsContext.Provider>
-  )
+  return <SettingsContext value={{ settings, saveSettings }}>{children}</SettingsContext>
 }
-
-export const SettingsConsumer = SettingsContext.Consumer
